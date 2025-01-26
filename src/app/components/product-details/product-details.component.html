@@ -1,0 +1,63 @@
+<div class="container-fluid m-0 p-0 ">
+    <div class="row p-0 m-0 bg-body-secondary" style="height: 72px;">
+    <div class="col-12 px-5 py-0 m-0 text-start d-flex align-items-center">
+        <a routerLink="/"class="p-0 m-0 text-decoration-none text-black">Inicio</a>
+        <p class="my-0 mx-1 p-0 text-decoration-none text-black">></p>
+        <a routerLink="/products" class="p-0 m-0 text-decoration-none text-black">Produtos</a>
+        <p class="my-0 mx-1 p-0 text-decoration-none text-black">></p>
+        <p class="p-0 m-0 ms-1 fw-bold">| {{product.name}} </p>
+    </div>
+    </div>
+    <div class="row p-0 m-0" style="height: 820px;">
+        <div class="col-5 p-0 m-0">
+            <div class="row p-0 m-0 h-100 w-100">
+                    <div class="col-lg-2 bg-warning">
+                        <ul class="list-group p-0 m-0 ">
+                            <li 
+                            *ngFor="let image of images; let i = index" 
+                            class="p-1">
+                            <img 
+                              [src]="image.imageUrl" 
+                              alt={{product.name}} 
+                              class="img-fluid w-75" 
+                              [class.active]="i === 0" 
+                              style="object-fit: cover; height: 72px;" 
+                              data-bs-target="#carouselExampleIndicators"
+                              [attr.data-bs-slide-to]="i" 
+                              [attr.aria-label]="'Slide ' + (i + 1)" 
+                              [attr.aria-current]="i === 0 ? 'true' : null">
+                          </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="col-10 bg-body-secondary p-1 m-0 ">
+                        <div id="carouselExampleIndicators" class="carousel slide">
+                            
+                            <div class="carousel-inner">
+                                <div 
+                                *ngFor="let image of images; let i = index" 
+                                class="carousel-item" 
+                                [class.active]="i === 0">
+                                <img 
+                                  [src]="image.imageUrl" 
+                                  class="d-block w-100" 
+                                  alt={{product.name}}>
+                              </div>
+                            </div>
+                            
+                          </div>
+                    </div>
+                    
+            </div>
+            
+        </div>
+        <div class="col-7 bg-warning-subtle">
+
+            
+
+        </div>
+    </div>
+    <div class="row p-0 m-0">
+        
+    </div>
+</div>

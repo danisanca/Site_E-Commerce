@@ -1,0 +1,54 @@
+<div class="bg-body-tertiary text-start me-2 mb-3 position-relative card-container">
+  <img
+    class="rounded w-100 img-fluid"
+    [src]="product.imageUrl"
+    alt="Quarto"
+  />
+  <p
+    class="text-center align-content-center rounded-circle bg-warning 
+    position-absolute top-0 end-0 p-1 mt-2 me-4"
+    style="width: 48px; height: 48px"
+    *ngIf="showDiscount"
+  >
+    <Span >-{{percent}}%</Span>
+  </p>
+  <p class="fw-bold mt-2 mb-0">{{product.name}}</p>
+  <p class="my-0"><span>{{product.description}}</span></p>
+  <div class="row p-0 m-0 d-flex">
+    <p class="col-5 fw-bold my-2 p-0 text-start">
+      <small>R$:{{priceEnd}}</small>
+    </p>
+    <p
+      class="col-5 fw-bold my-2 mx-auto p-0 text-end fw-light text-decoration-line-through"
+      *ngIf="showDiscount"
+      >
+      <small>R$:{{price}}</small>
+    </p>
+  </div>
+<!-- -->
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
+      d-flex justify-content-center align-items-center overlay-buttons">
+  <div class="text-center w-75">
+    <a routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">Comprar</a>
+    <button  class="btn btn-secondary my-2 w-100">Adicionar ao Carrinho</button>
+  </div>
+  </div>
+</div>
+<!--
+
+<div class="col-lg-2 bg-warning py-5 px-0 m-0 d-flex justify-content-center">
+                    <ul class="list-group">
+                        <li><img [src]="product.imageUrl" alt="product" class="img-fluid w-75" 
+                            style="object-fit: cover; height: 72px;"></li>
+                            <li><img [src]="product.imageUrl" alt="product" class="img-fluid w-75" 
+                                style="object-fit: cover; height: 72px;"></li>
+                    </ul>
+                    
+                </div>
+                <div class="col-10 bg-body-secondary p-2 m-0">
+                    <img [src]="product.imageUrl" alt="product" class="w-100 h-75 img-fluid" 
+                        style="object-fit: cover;">
+                </div>
+
+
+-->
