@@ -8,56 +8,83 @@
         <p class="p-0 m-0 ms-1 fw-bold">| {{product.name}} </p>
     </div>
     </div>
-    <div class="row p-0 m-0" style="height: 820px;">
-        <div class="col-5 p-0 m-0">
-            <div class="row p-0 m-0 h-100 w-100">
-                    <div class="col-lg-2 bg-warning">
-                        <ul class="list-group p-0 m-0 ">
-                            <li 
-                            *ngFor="let image of images; let i = index" 
-                            class="p-1">
-                            <img 
-                              [src]="image.imageUrl" 
-                              alt={{product.name}} 
-                              class="img-fluid w-75" 
-                              [class.active]="i === 0" 
-                              style="object-fit: cover; height: 72px;" 
-                              data-bs-target="#carouselExampleIndicators"
-                              [attr.data-bs-slide-to]="i" 
-                              [attr.aria-label]="'Slide ' + (i + 1)" 
-                              [attr.aria-current]="i === 0 ? 'true' : null">
-                          </li>
-                        </ul>
-                        
+    <div class="row p-0 m-0" style="height: 568px;">
+        <div class="container-fluid mt-4">
+            <div class="row">
+              <div class="col-md-2 d-flex flex-column align-items-center">
+                <img *ngFor="let img of images"
+                     [src]="img.imageUrl"
+                     class="img-thumbnail mb-2 w-50"
+                     [class.selected]="img.imageUrl === selectedImage"
+                     (click)="changeImage(img.imageUrl)"
+                     alt="Miniatura do Produto">
+              </div>
+          
+              <div class="col-md-6">
+                <div class="main-image-container">
+                  <img [src]="selectedImage" class="main-image" alt="Imagem Principal">
+                </div>
+              </div>
+          
+              <div class="col-md-4">
+                <h1>{{ product.name }}</h1>
+                <h3 class="text-black-50">R$ {{ product.price | number:'1.2-2' }}</h3>
+                <div class="row d-flex align-items-center">
+                    <div style="width: auto;">
+                        <span *ngFor="let star of [1, 2, 3, 4, 5]" 
+                        class="star" >
+                        <ng-container [ngSwitch]="getStarType(star)">
+                            <i *ngSwitchCase="'full'" class="bi bi-star-fill"></i>
+                            <i *ngSwitchCase="'half'" class="bi bi-star-half"></i>
+                            <i *ngSwitchCase="'empty'" class="bi bi-star"></i>
+                        </ng-container>
+                    </span>
+                     </div>
+                    <p class="my-0 mx-2 p-0 text-decoration-none text-black"style="width: auto;">|</p>
+                   
+                    <p class="m-0 p-0 ms-3" style="width: auto;">{{numberAvaliations}} Avaliações</p>  
+                </div>
+               
+                <p>{{ product.description }}</p>
+                <div class="col-12 d-flex  m-0 p-0 ">
+                  <div class="color-picker">
+                    <p class="text-start">Cores:</p>
+                    <div class="color-options">
+                      <button 
+                        *ngFor="let color of availableColors"
+                        [style.background]="color"
+                        [class.selected]="color === selectedColor"
+                        (click)="selectColor(color)">
+                      </button>
                     </div>
-                    <div class="col-10 bg-body-secondary p-1 m-0 ">
-                        <div id="carouselExampleIndicators" class="carousel slide">
-                            
-                            <div class="carousel-inner">
-                                <div 
-                                *ngFor="let image of images; let i = index" 
-                                class="carousel-item" 
-                                [class.active]="i === 0">
-                                <img 
-                                  [src]="image.imageUrl" 
-                                  class="d-block w-100" 
-                                  alt={{product.name}}>
-                              </div>
-                            </div>
-                            
-                          </div>
-                    </div>
-                    
+                   
+                  </div>
+                </div>
+                <div class="row d-flex w-100 flex-column py-3 justify-content-center align-content-center">
+                  <div class="d-flex gap-1 align-content-center justify-content-center p-0 mx-0 my-2" style="width: auto;">
+                    <button (click)="decreaseQuantity()" class="btn-selector">-</button>
+                    <input type="number" [(ngModel)]="quantity" min="1" class="no-arrows">
+                    <button (click)="increaseQuantity()" class="btn-selector">+</button>
+                    <p class="p-0 my-0 ms-2 me-0 align-content-center">{{stock.amount}} Disponivel</p>
+                  </div>
+                  <button class="btn btn-primary w-50 my-2">
+                    Comprar
+                  </button>
+                  <button class="btn btn-secondary w-50 my-2">
+                    Adicionar ao Carrinho
+                  </button>
+                </div>
+                
+              </div>
             </div>
-            
-        </div>
-        <div class="col-7 bg-warning-subtle">
-
-            
-
-        </div>
+          </div>
     </div>
-    <div class="row p-0 m-0">
-        
+    <div class="row p-0 m-0 border border-top">
+      <p class="text-center mt-4 display-6">Avaliações [{{numberAvaliations}}]</p>
+      <ul class="list-group">
+        <li *ngFor="let evidence of evidences">
+          a
+        </li>
+      </ul>
     </div>
 </div>

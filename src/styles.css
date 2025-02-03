@@ -24,3 +24,12 @@ html, body {
   .flex-grow-1 {
     flex: 1; 
   }
+  
+  .no-arrows {
+    -moz-appearance: textfield;
+  }
+  .no-arrows::-webkit-inner-spin-button,
+  .no-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }

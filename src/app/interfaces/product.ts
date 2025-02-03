@@ -3,6 +3,7 @@ export interface Product{
     shopId:number;
     name:string;
     price:number;
+    rating:number;
     categoria:string;
     imageUrl:string;
     description:string;

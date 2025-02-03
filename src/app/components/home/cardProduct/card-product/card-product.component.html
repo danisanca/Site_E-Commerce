@@ -13,7 +13,7 @@
     <Span >-{{percent}}%</Span>
   </p>
   <p class="fw-bold mt-2 mb-0">{{product.name}}</p>
-  <p class="my-0"><span>{{product.description}}</span></p>
+  <p class="my-0"><span>{{product.description | slice:0:32}}</span></p>
   <div class="row p-0 m-0 d-flex">
     <p class="col-5 fw-bold my-2 p-0 text-start">
       <small>R$:{{priceEnd}}</small>
@@ -34,21 +34,4 @@
   </div>
   </div>
 </div>
-<!--
 
-<div class="col-lg-2 bg-warning py-5 px-0 m-0 d-flex justify-content-center">
-                    <ul class="list-group">
-                        <li><img [src]="product.imageUrl" alt="product" class="img-fluid w-75" 
-                            style="object-fit: cover; height: 72px;"></li>
-                            <li><img [src]="product.imageUrl" alt="product" class="img-fluid w-75" 
-                                style="object-fit: cover; height: 72px;"></li>
-                    </ul>
-                    
-                </div>
-                <div class="col-10 bg-body-secondary p-2 m-0">
-                    <img [src]="product.imageUrl" alt="product" class="w-100 h-75 img-fluid" 
-                        style="object-fit: cover;">
-                </div>
-
-
--->
