@@ -1,4 +1,4 @@
-<div class="bg-body-tertiary text-start me-2 mb-3 position-relative card-container">
+<div class="bg-body-tertiary text-start position-relative card-container">
   <img
     class="rounded w-100 img-fluid"
     [src]="product.imageUrl"
@@ -14,12 +14,12 @@
   </p>
   <p class="fw-bold mt-2 mb-0">{{product.name}}</p>
   <p class="my-0"><span>{{product.description | slice:0:32}}</span></p>
-  <div class="row p-0 m-0 d-flex">
-    <p class="col-5 fw-bold my-2 p-0 text-start">
+  <div class="row p-0 m-0 d-flex flex-wrap">
+    <p class="col-md-5 col-12 fw-bold my-2 p-0 text-start">
       <small>R$:{{priceEnd}}</small>
     </p>
     <p
-      class="col-5 fw-bold my-2 mx-auto p-0 text-end fw-light text-decoration-line-through"
+      class="col-md-5 col-12 fw-bold my-2 mx-auto p-0 text-start text-md-end fw-light text-decoration-line-through"
       *ngIf="showDiscount"
       >
       <small>R$:{{price}}</small>
