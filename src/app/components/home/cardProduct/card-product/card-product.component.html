@@ -4,14 +4,24 @@
     [src]="product.imageUrl"
     alt="Quarto"
   />
+ <div>
+    <p
+    class="text-center align-content-center rounded bg-danger 
+    position-absolute top-0 p-1 ms-1 mt-2 me-4"
+    style="width: auto; height: 32px"
+    *ngIf="showSoldOut"
+  >
+    <Span class="text-white" >Esgotado</Span>
+  </p>
   <p
     class="text-center align-content-center rounded-circle bg-warning 
-    position-absolute top-0 end-0 p-1 mt-2 me-4"
+    position-absolute top-0 end-0 p-1 mt-2 me-1"
     style="width: 48px; height: 48px"
     *ngIf="showDiscount"
   >
     <Span >-{{percent}}%</Span>
   </p>
+ </div>
   <p class="fw-bold mt-2 mb-0">{{product.name}}</p>
   <p class="my-0"><span>{{product.description | slice:0:32}}</span></p>
   <div class="row p-0 m-0 d-flex flex-wrap">

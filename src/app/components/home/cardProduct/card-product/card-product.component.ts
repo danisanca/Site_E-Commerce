@@ -13,6 +13,7 @@ import {  RouterLink } from '@angular/router';
 export class CardProductComponent implements OnInit{
   @Input() product!:Product
   showDiscount:boolean=false;
+  @Input() showSoldOut:boolean = false;
   price!:number
   priceEnd!:number
   percent!:number
@@ -34,6 +35,7 @@ export class CardProductComponent implements OnInit{
     }
     console.log(this.product.discount);
     console.log(this.showDiscount);
+    console.log(this.showSoldOut);
   }
 
 

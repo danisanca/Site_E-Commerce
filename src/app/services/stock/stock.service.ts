@@ -7,10 +7,10 @@ import { Stock } from '../../interfaces/stock';
 export class StockService {
 stocks:Stock[]=[
   { id: 1, productId: 1, amount:5, status: 'Ativo' },
-  { id: 2, productId: 2, amount:5, status: 'Ativo' },
+  { id: 2, productId: 2, amount:5, status: 'Desabilitado' },
   { id: 3, productId: 3, amount:5, status: 'Ativo' },
   { id: 4, productId: 4, amount:5, status: 'Ativo' },
-  { id: 5, productId: 5, amount:5, status: 'Ativo' },
+  { id: 5, productId: 5, amount:0, status: 'Ativo' },
   { id: 6, productId: 6, amount:5, status: 'Ativo' },
   { id: 7, productId: 7, amount:5, status: 'Ativo' },
   { id: 8, productId: 8, amount:5, status: 'Ativo' },
@@ -25,6 +25,8 @@ stocks:Stock[]=[
         throw new Error(`Product with id ${id} not found`);
       }
       return findStock;
-      
     }
+  getAllStocks(): Stock[] {
+    return this.stocks.filter((stock) => stock.status === 'Ativo');
+  }
 }
