@@ -28,6 +28,7 @@ export class CardProductComponent implements OnInit{
       this.showDiscount = true;
       this.priceEnd = parseFloat((this.price - (this.product.discount.value * this.price) / 100).toFixed(2));
       this.percent = this.product.discount.value;
+      
     } else {
       this.showDiscount = false;
       this.priceEnd = parseFloat(this.product.price.toFixed(2));

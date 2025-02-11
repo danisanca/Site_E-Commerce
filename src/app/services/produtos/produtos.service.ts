@@ -10,7 +10,7 @@ export class ProdutosService {
       {
         id: 1,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'AGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 100,
         rating: 3.5,
@@ -22,7 +22,7 @@ export class ProdutosService {
       {
         id: 2,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'BGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 200,
         rating: 3.5,
@@ -34,7 +34,7 @@ export class ProdutosService {
       {
         id: 3,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'CGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 100.50,
         rating: 3.5,
@@ -45,7 +45,7 @@ export class ProdutosService {
       {
         id: 4,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'DGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 1000.50,
         rating: 3.5,
@@ -57,7 +57,7 @@ export class ProdutosService {
       {
         id: 5,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'EGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 10000.52,
         rating: 3.5,
@@ -68,7 +68,7 @@ export class ProdutosService {
       {
         id: 6,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'FGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 100000.50,
         rating: 3.5,
@@ -80,7 +80,7 @@ export class ProdutosService {
       {
         id: 7,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'GGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 1000000.51,
         rating: 3.5,
@@ -91,7 +91,7 @@ export class ProdutosService {
       {
         id: 8,
         shopId: 1,
-        name: 'Guardanapo',
+        name: 'HGuardanapo',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!',
         price: 10.51,
         rating: 3.5,

@@ -20,13 +20,18 @@ export class ProductDetailsComponent implements OnInit {
   product!:Product;
   images!:Image[];
   stock!:Stock;
-  selectedImage!:string; // Começa com a primeira imagem
   evidences!:Evidence[];
+  //Controle de Imagens
+  selectedImage!:string;
+  //Avaliações
   numberAvaliations=0;
   availableColors: string[] = ['#ff0000', '#00ff00', '#0000ff'];
+  //Seleção de Cor
   selectedColor: string = this.availableColors[0];
+  //Estoque
   quantity: number = 1; 
   maxQuantity:number=0;
+  canBuy:boolean = false;
 
   changeImage(image: string) {
     this.selectedImage = image;
@@ -62,7 +67,8 @@ export class ProductDetailsComponent implements OnInit {
       if (this.quantity > 1) {
         this.quantity--;
       }
-    }
+  }
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -76,14 +82,23 @@ export class ProductDetailsComponent implements OnInit {
         this.images = this.imagesService.getImagesByProductId(this.product.id!)
         this.evidences = this.evidenceService.getEvidencesByProductId(this.product.id!);
         this.stock = this.stockService.getStockByProductId(this.product.id!);
-        this.maxQuantity = this.stock.amount;
         this.numberAvaliations = this.evidences.length;
+        this.validStock();
       }    
 
     this.images.forEach(element => {
         console.log(element.imageUrl);
       });
     this.selectedImage = this.images[0].imageUrl;
+  }
+  validStock(){
+    if(this.stock.amount > 0 && this.stock.status === "Ativo"){
+      this.canBuy = true;
+      this.maxQuantity = this.stock.amount;
+    }else{
+      this.canBuy = false;
+      this.maxQuantity = 0;
+    }
   }
 
 }

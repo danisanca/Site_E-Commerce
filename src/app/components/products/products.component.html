@@ -14,30 +14,33 @@
             </div>
         </div>
     </div>
-    <div class="row px-1 m-0 py-2 bg-danger-subtle d-flex position-relative align-content-around justify-content-center" 
+    <div class="row px-1 m-0 py-2 bg-danger-subtle d-flex position-relative align-content-around justify-content-start" 
         style="height: auto; z-index: 2;">
        
-        <div class="col-12 col-md-3 px-1 py-1 py-md-0">
-            <select class="form-select form-select-sm w-100"  aria-label="Small select example" style="height: 42px; width: auto">
-                <option selected>Categorias</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+        <div class="col-12 col-sm-4 col-lg-3 px-1 py-1 py-sm-0">
+            <select class="form-select form-select-sm w-100"  
+                    aria-label="Small select example" 
+                    style="height: 42px; width: auto"
+                    (change)="onCategoryChange($event)">
+                <option value="" selected>Todos os Produtos</option>
+                <option *ngFor="let category of cartegories" [value]="category.name">
+                    {{ category.name }}
+                  </option>
             </select>
         </div>
-        <div class="col-12 col-md-3 px-1 py-12 py-md-0"  >
-            <select class="form-select form-select-sm w-100"   aria-label="Small select example" style="height: 42px; width: auto">
-                <option selected>Classificação</option>
-                <option value="1">A_Z</option>
-                <option value="2">Z_A</option>
+        <div class="col-12 col-sm-4 col-lg-3 px-1 py-12 py-sm-0"  >
+            <select class="form-select form-select-sm w-100"
+                    aria-label="Small select example" 
+                    style="height: 42px; width: auto"
+                    (change)="onOrderChange($event)">
+                <option value="" selected>Classificação</option>
+                <option value="A-Z">A-Z</option>
+                <option value="Z-A">Z-A</option>
+                <option value="MenorPreço">Menor Preço</option>
+                <option value="MaiorPreço">Maior Preço</option>
             </select>
         </div>
-        <div class="col-12 col-md-3 px-1 py-1 py-md-0" >
-            <div class="input-group w-100" style="height: 42px; width: auto">
-                <input type="text" class="form-control" placeholder="Buscar por Produto" aria-label="Buscar por Produto" aria-describedby="basic-addon1">
-              </div>
-        </div>
-      
+        
     </div>
 
     <div class="row p-0 m-0" style="height: auto;">
@@ -49,9 +52,9 @@
             <div class="row px-0 py-4 m-0">
                 <div class="row w-100 p-0 m-0 d-flex justify-content-center mt-3">
                     <app-card-product class="col-10 col-sm-5 col-lg-3 col-xl-2 mx-2 mb-5 
-                        position-relative" *ngFor="let product of products"
+                        position-relative" *ngFor="let product of productList"
                         [product]="product"
-                        [showSoldOut]="true">
+                        [showSoldOut]="product.showSoldOut">
                     </app-card-product>
                 </div>
             </div>
