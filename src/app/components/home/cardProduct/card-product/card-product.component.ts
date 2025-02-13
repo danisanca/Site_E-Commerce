@@ -34,9 +34,6 @@ export class CardProductComponent implements OnInit{
       this.priceEnd = parseFloat(this.product.price.toFixed(2));
       this.percent = 0;
     }
-    console.log(this.product.discount);
-    console.log(this.showDiscount);
-    console.log(this.showSoldOut);
   }
 
 

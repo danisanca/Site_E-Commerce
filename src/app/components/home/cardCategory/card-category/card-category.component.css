@@ -1,0 +1,14 @@
+.overlay-buttons {
+    display: none !important; 
+}
+.card-container:hover .overlay-buttons {
+    display: flex !important; 
+    opacity: 1 !important;
+    transition: opacity 0.3s ease !important;
+}
+.card-container:hover img {
+    opacity: 0.6 !important; 
+}
+.card-container img {
+    transition: opacity 0.3s ease !important; 
+}

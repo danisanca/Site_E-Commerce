@@ -3,7 +3,7 @@
     class="rounded w-100 img-fluid"
     [src]="product.imageUrl"
     alt="Quarto"
-  />
+    />
  <div>
     <p
     class="text-center align-content-center rounded bg-danger 
@@ -35,13 +35,13 @@
       <small>R$:{{price}}</small>
     </p>
   </div>
-<!-- -->
+<!--Buttons Overlay -->
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
       d-flex justify-content-center align-items-center overlay-buttons">
-  <div class="text-center w-75">
-    <a routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">Comprar</a>
-    <button  class="btn btn-secondary my-2 w-100">Adicionar ao Carrinho</button>
-  </div>
+    <div class="text-center w-75">
+      <a routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">Comprar</a>
+      <button  class="btn btn-secondary my-2 w-100">Adicionar ao Carrinho</button>
+    </div>
   </div>
 </div>
 

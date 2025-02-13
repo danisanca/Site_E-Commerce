@@ -12,7 +12,7 @@
                 <h1 class="fw-bold text-warning">Discover Our New Collection</h1>
                 <p class="text-break">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Ut elit tellus, luctus nec ullamcorper mattis.</p>
-                <button class="btn btn-warning bg-opacity-25 text-white" style="z-index: 2; width: 50%; " >Buy Now</button>
+                
             </div>
         </div>
     </div>
@@ -39,8 +39,7 @@
                 <app-card-product class="col-10 col-sm-5 col-lg-3 col-xl-2 mx-2 mb-5 
                     position-relative" *ngFor="let product of productList"
                     [product]="product"
-                    [showSoldOut]="product.showSoldOut"
-                    >
+                    [showSoldOut]="product.showSoldOut">
                 </app-card-product>
             </div>
         </div>

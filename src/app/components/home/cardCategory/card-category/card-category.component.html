@@ -1,4 +1,13 @@
-<div >
+<div class="card-container position-relative" >
     <img class="rounded w-100 img-fluid" [src]="category.imageUrl" alt="Quarto">
     <p class="fw-bold mt-2">{{category.name}}</p>
+
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
+      d-flex justify-content-center align-items-center overlay-buttons">
+        <div class="text-center w-75">
+            
+            <button (click)="goProducts()" class="btn btn-primary my-2 w-100">Visualizar</button>
+        </div>
+  </div>
+
 </div>
