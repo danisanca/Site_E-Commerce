@@ -1,17 +1,10 @@
-.container-fluid{
-    height: 5vh;
+.logo-container{
+   width: 16%;
 }
 .logo-container img{
     width: 128px;
-        min-width: 128px;
-        margin-right: 16px;
-}
-
-
-@media (max-width: 991px) {
-    .logo-container{
-        width: 178px;
-        min-width: 178px;
-    }
-   
-}
+    padding-left: 0;
+    padding-right: 0;
+    cursor: pointer;
+ }
+ 

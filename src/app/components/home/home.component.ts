@@ -32,18 +32,20 @@ export class HomeComponent implements OnInit {
     this.products = this.productService.getAllProducts()
     this.categories = this.categoriesService.getAllCategories()
     this.stocks = this.stockService.getAllStocks();
-    this.productList = this.products;
     this.updateListProducts();
   }
   
   updateListProducts(){
     
-      this.productList = this.products.map(product => ({
+      //Cria uma map de produtos com o parametro showSoldOut
+      let filterProducts = this.products.map(product => ({
         ...product,
-        showSoldOut: !this.findStock(product.id!) // Define se está esgotado
+        showSoldOut: !this.findStock(product.id!)
       }));
-    
-    
+    //Regra para sugerir produtos
+    this.productList = filterProducts
+    .sort(() => Math.random() - 0.5) 
+    .slice(0, 4);;
   }
   findStock(productId: number): boolean {
     const stock = this.stocks.find(stock => stock.productId === productId);

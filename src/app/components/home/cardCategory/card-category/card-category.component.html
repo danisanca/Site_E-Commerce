@@ -1,6 +1,9 @@
 <div class="card-container position-relative" >
     <img class="rounded w-100 img-fluid" [src]="category.imageUrl" alt="Quarto">
-    <p class="fw-bold mt-2">{{category.name}}</p>
+    <div class="position-absolute top-0 end-0 d-flex align-content-center bg-light px-2 mt-2 me-2
+                rounded" >
+        <p class="fw-bold m-0 p-1">{{category.name}}</p>
+    </div>
 
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
       d-flex justify-content-center align-items-center overlay-buttons">

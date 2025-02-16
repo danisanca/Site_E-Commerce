@@ -25,7 +25,8 @@
               "src/assets",
               "src/assets/contactPage",
               "src/assets/home",
-              "src/assets/products"
+              "src/assets/products",
+              "src/assets/about"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

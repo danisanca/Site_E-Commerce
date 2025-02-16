@@ -1,48 +1,68 @@
-<header class="container-fluid p-0 m-0 d-inline">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary px-0 px-lg-1 pb-0">
-        <div class="container-fluid p-0">
-          
-            <div class = logo-container>
-            <img src="assets/logo.png" alt="Logo">
-            </div>
-          
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-              data-bs-target="#navbarSupportedContent" 
-              aria-controls="navbarSupportedContent" aria-expanded="true" 
-              aria-label="Toggle navigation">
-
-            <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="navbar-collapse collapse show bg-body-tertiary p-0 m-0" id="navbarSupportedContent">
-            <ul class="navbar-nav text-end me-3 mb-1 mb-lg-0 ">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/products">Produtos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/contact">Contato</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/about">Sobre</a>
-              </li>
-              
-            </ul>
-            <div class="container-fluid p-0">
-              <div class = "containet-form collapse show bg-body-tertiary p-1">
-                <form class="form d-flex col-10 col-sm-6 col-md-8 col-lg-6 ms-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-            </div>
-            </div>
-            
-            
+<header class="container-fluid p-0 m-0" style="height: auto;">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class = "logo-container ms-1" >
+        <img routerLink="/" src="assets/logo.png" alt="Logo" >
+      </div>
+      <div class="d-flex align-items-end justify-content-end">
+        <!-- Botão de abertura do navbar -->
+          <div *ngIf="sizeCart >=1"  class="btn d-flex d-lg-none position-relative p-0 my-0 me-3 ms-0 " style="height: 42px; width: 42px;cursor: pointer;">
+            <i class="bi bi-cart d-flex m-auto position-relative"
+              routerLink="/cart" ></i>
+  
+              <p class="m-0 text-black rounded-circle m-1 d-flex justify-content-center" 
+              style="height: 18px; width: 18px;">
+                {{sizeCart}}
+              </p>
+          </div>
+        <button id="navbar-toggler-open" class="navbar-toggler p-0" type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation" style="height: 42px; width: 42px;">
+        <i class="navbar-toggler-icon" ></i>
+        </button>
+       
+     
+        <!-- Botão alternativo que será mostrado após o menu ser aberto -->
+        <button id="navbar-toggler-close" class="navbar-toggler p-0" 
+        type="button" aria-label="Close navigation" style="display: none; height: 42px; width: 42px;">
+          <i class="bi bi-x"></i>
+        </button>
         </div>
-      </nav>
-    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/products">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact">Contato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about">Sobre</a>
+          </li>
+          
+        </ul>
+        <div *ngIf="sizeCart >=1" class="d-none d-lg-flex position-relative p-0 my-0 me-3 ms-0" style="height: 42px; width: 42px; cursor: pointer;">
+          
+          <i  class="bi bi-cart d-flex m-auto position-relative"
+            routerLink="/cart" ></i>
+
+            <p class="m-0 text-black rounded-circle m-1 d-flex justify-content-center" 
+            style="height: 18px; width: 18px;">
+              {{sizeCart}}
+            </p>
+
+        </div>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
   </header>
