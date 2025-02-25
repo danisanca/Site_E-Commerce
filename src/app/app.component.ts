@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
+import { CartService } from './services/cart/cart.service';
+import { CartItem } from './interfaces/cartItem';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,9 @@ import { FooterComponent } from "./components/footer/footer.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  
   title:string = 'SiteEcommerce';
-  sizeCart:number = 0;
+  
+
   
 }

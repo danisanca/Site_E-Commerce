@@ -2,6 +2,8 @@ import { Component ,Input, OnInit} from '@angular/core';
 import { Product } from '../../../../interfaces/product';
 import { CommonModule } from '@angular/common';
 import {  RouterLink } from '@angular/router';
+import { CartService } from '../../../../services/cart/cart.service';
+import { CartItem } from '../../../../interfaces/cartItem';
 
 @Component({
   selector: 'app-card-product',
@@ -18,6 +20,21 @@ export class CardProductComponent implements OnInit{
   priceEnd!:number
   percent!:number
   showButtons:boolean=false;
+
+  constructor(private cartService:CartService){}
+
+  addToCart(product: Product) {
+    let finalPrice:number = 0;
+    if (product.discount != undefined) {
+      finalPrice = parseFloat((product.price - (product.discount.value * product.price) / 100).toFixed(2));
+      
+    } else {
+      finalPrice = parseFloat(product.price.toFixed(2));
+    }
+    const cartItem: CartItem = { idProduct:product.id, product, quantity: 1, finalPrice };
+    console.log(cartItem);
+    this.cartService.addToCart(cartItem);
+  }
 
   ngOnInit(): void {
    

@@ -1,50 +1,74 @@
 <div class="container-fluid p-0 m-0">
     <div class="row p-0 m-0">
         <div class="col-12 col-lg-8 m-0 py-3 px-2">
-                <div class="row m-0 bg-body-tertiary d-flex justify-content-between">
-                <p class="h3 fw-bold pt-3 pb-0 px-2 " style="width: auto;">Lista de compras</p>
-                 <p class="btn btn-secondary my-3 mx-md-3 mx-2" style="width: 256px;">Limpar Carrinho</p>
-                
-                 <div class="row p-0 m-0">
-                    <div class="col-3 col-lg-2 p-2 m-0" >
-                        <img class="w-100" src="assets/about/frontLoja.png" alt="Frente da Loja" style="object-fit: cover; height: 88px;">
+                <div class="row m-0 px-1 py-1 bg-body-tertiary d-flex justify-content-between">
+                    <p class="h3 fw-bold pt-3 pb-0 px-2 " style="width: auto;">Lista de compras</p>
+                    <p (click)="clearCart()" class="btn btn-secondary my-3 mx-md-3 mx-2" style="width: 256px;">Limpar Carrinho</p>
+                    
+                    <div class="row mx-0 my-1 px-0 py-2 bg-warning-subtle" *ngFor="let cartItem of cartList">
+                        <!--Imagem-->
+                        <div class="col-3 col-lg-2 p-2 m-0" >
+                            <img class="w-100" src="assets/about/frontLoja.png" alt="Frente da Loja" style="object-fit: cover; height: 88px;">
+                        </div>
+                        
+                        <!--Titulo e Descrição-->
+                        <div class="col-9 col-lg-6 py-0 px-1 m-0">
+                            <p class="fw-bold" >
+                                {{cartItem.product.name}}
+                            </p>
+                            <p>
+                                {{cartItem.product.description}}
+                            </p>
+                        </div>
+                        <!--Quantidade e Remover Item-->
+                        <div class="col-12 col-lg-2 d-flex flex-column py-0 px-1 m-auto m-lg-0 justify-content-center"
+                         style="width: auto;">
+                            <p class="fw-bold text-center" >
+                                Quantidade
+                            </p>
+                            
+                              <div class="d-flex align-items-center justify-content-center">
+                                <button (click)="decreaseQuantity(cartItem.idProduct!)" class="bg-transparent border-0 p-1">
+                                  &lt;
+                                </button>
+                                <span class="mx-3 fw-bold">{{ cartItem.quantity }}</span>
+                                <button (click)="increaseQuantity(cartItem)" class="bg-transparent border-0 p-1">
+                                  &gt;
+                                </button>
+                                
+                              </div>
+                              <button class="mt-3" (click)="removeItem(cartItem.idProduct!)">Remover</button>
+                        </div>
+                        <!--Preço-->
+                        <div class="col-12 col-lg-2 d-flex flex-column py-0 px-1 m-auto m-lg-0 align-content-center justify-content-center"
+                         >
+                            <p class="fw-bold text-center" >
+                                Preço à Vista:
+                            </p>
+                            <p class="fw-bold text-center">
+                               {{(cartItem.finalPrice * cartItem.quantity) | currency:'BRL'}}
+                            </p>
+                        </div>
                     </div>
                     
-                    <!--Titulo e Descrição-->
-                    <div class="col-9 col-lg-6 p-0 m-0">
-                        <p class="fw-bold" >
-                            Titulo
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat mollitia aspernatur esse minima unde accusantium. Architecto est fugit labore placeat!
-                        </p>
-                    </div>
-                    <!--Quantidade e Remover Item-->
-                    <div class="col-12 col-lg-2 p-0 m-0" >
-                        <p class="fw-bold" >
-                            Quantidade
-                        </p>
-                        <p>
-                            12
-                        </p>
-                    </div>
-                    <!--Preço-->
-                    <div class="col-12 col-lg-2 p-1 m-0" >
-                        <p class="fw-bold" >
-                            Preço à Vista:
-                        </p>
-                        <p>
-                            R$:130000,00
-                        </p>
-                    </div>
                 </div>
-            </div>
            
         </div>
+        <!--Resumo da compra-->
         <div class="col-12 col-lg-4 m-0 py-3 px-2">
-            <div class="row p-0 m-0 d-flex bg-body-tertiary">
-                teste
+            <div class="row py-3 px-1 m-0 d-flex bg-body-tertiary">
+               <h4 class="fw-bold mt-3">Resumo:</h4>
+               <div class="mt-3 d-flex justify-content-between
+                    border-bottom border-1 border-dark">
+                <p>Valor dos Produtos:</p>
+                <p class="fw-bold">{{finalPrice}}</p>
+               </div>
             </div>
+            <div class="row py-3 px-1 mb-0 mt-3 mx-0 d-flex bg-body-tertiary justify-content-center">
+                <a class="btn btn-primary my-1 mx-0 w-75">Finalizar Pedido</a>
+                <a routerLink="/products" routerLinkActive="router-link-active" 
+                    class="btn btn-secondary my-1 mx-0 w-75">Continuar Comprando</a>
+             </div>
         </div>
     </div>
 </div>

@@ -26,21 +26,21 @@
   <p class="my-0"><span>{{product.description | slice:0:32}}</span></p>
   <div class="row p-0 m-0 d-flex flex-wrap">
     <p class="col-md-5 col-12 fw-bold my-2 p-0 text-start">
-      <small>R$:{{priceEnd}}</small>
+      <small>R$:{{priceEnd | currency:'BRL'}}</small>
     </p>
     <p
       class="col-md-5 col-12 fw-bold my-2 mx-auto p-0 text-start text-md-end fw-light text-decoration-line-through"
       *ngIf="showDiscount"
       >
-      <small>R$:{{price}}</small>
+      <small>R$:{{price | currency:'BRL'}}</small>
     </p>
   </div>
 <!--Buttons Overlay -->
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
       d-flex justify-content-center align-items-center overlay-buttons">
     <div class="text-center w-75">
-      <a routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">Comprar</a>
-      <button  class="btn btn-secondary my-2 w-100">Adicionar ao Carrinho</button>
+      <a  routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">{{ showSoldOut ? 'Ver' : 'Comprar' }}</a>
+      <button *ngIf="!showSoldOut" class="btn btn-secondary my-2 w-100" (click)="addToCart(product)">Adicionar ao Carrinho</button>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import {  RouterLink } from '@angular/router';
 import Collapse from 'bootstrap/js/dist/collapse';
 import { CartItem } from '../../interfaces/cartItem';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +14,15 @@ import { CommonModule } from '@angular/common';
 })
 
 export class HeaderComponent implements OnInit,AfterViewInit {
-  @Input() sizeCart!:number;
-  ngOnInit(): void {
+  sizeCart!:number;
+  cartList!:CartItem[];
 
+  constructor(private cartService:CartService){}
+  ngOnInit(): void {
+    this.cartService.cart$.subscribe(items => {
+      this.cartList = items;
+      this.sizeCart = this.cartList.length;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -25,13 +32,10 @@ export class HeaderComponent implements OnInit,AfterViewInit {
     const togglerClose = document.getElementById('navbar-toggler-close') as HTMLElement
     const collapseInstance = new Collapse(navbarCollapse, { toggle: false });
     navLinks.forEach((link) => {
-      console.log(link);
+      
       link.addEventListener('click', () => {
         if (navbarCollapse?.classList.contains('show')) {
-          console.log('true');
-          // Fecha o collapse
           const collapse = new Collapse(navbarCollapse as HTMLElement);
-          console.log(collapse);
           collapse.hide();
           togglerOpen.style.display = 'block';
           togglerClose.style.display = 'none';
