@@ -4,43 +4,38 @@
     [src]="product.imageUrl"
     alt="Quarto"
     />
- <div>
-    <p
-    class="text-center align-content-center rounded bg-danger 
-    position-absolute top-0 p-1 ms-1 mt-2 me-4"
-    style="width: auto; height: 32px"
-    *ngIf="showSoldOut"
-  >
-    <Span class="text-white" >Esgotado</Span>
-  </p>
-  <p
-    class="text-center align-content-center rounded-circle bg-warning 
-    position-absolute top-0 end-0 p-1 mt-2 me-1"
-    style="width: 48px; height: 48px"
-    *ngIf="showDiscount"
-  >
-    <Span >-{{percent}}%</Span>
-  </p>
- </div>
-  <p class="fw-bold mt-2 mb-0">{{product.name}}</p>
-  <p class="my-0"><span>{{product.description | slice:0:32}}</span></p>
+    <div class="card-soldOut rounded d-flex position-absolute top-0 start-0 
+     px-2 py-1 align-items-center justify-content-between w-100" style="height: 32px;">
+      <p class="text-white fw-bold m-0 position-absolute top-0 start-0 bg-danger mt-1 ms-1 p-1 rounded" *ngIf="showSoldOut"
+      style="width: auto;">
+        Esgotado
+      </p>
+      <p class="rounded-circle text-discount d-flex justify-content-center align-items-center mt-1 me-1
+        position-absolute top-0 end-0"
+         style="width: 48px; height: 48px;"
+         *ngIf="showDiscount">
+        -{{percent}}%
+      </p>
+    </div>
+  <h4 class="fw-bold ps-1 mt-2 mb-0">{{product.name}}</h4>
+  <p class="ps-1 my-0 text-desc-Product"><span>{{product.description | slice:0:32}}</span></p>
   <div class="row p-0 m-0 d-flex flex-wrap">
-    <p class="col-md-5 col-12 fw-bold my-2 p-0 text-start">
-      <small>R$:{{priceEnd | currency:'BRL'}}</small>
-    </p>
+    <h5 class="ps-1 col-md-5 col-12 fw-bold my-2 p-0 text-start">
+      {{priceEnd | currency:'BRL'}}
+    </h5>
     <p
       class="col-md-5 col-12 fw-bold my-2 mx-auto p-0 text-start text-md-end fw-light text-decoration-line-through"
-      *ngIf="showDiscount"
+      *ngIf="showDiscount" style="color: var(--gray-text-color)"
       >
-      <small>R$:{{price | currency:'BRL'}}</small>
+      <small>{{price | currency:'BRL'}}</small>
     </p>
   </div>
 <!--Buttons Overlay -->
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
       d-flex justify-content-center align-items-center overlay-buttons">
     <div class="text-center w-75">
-      <a  routerLink="/products/{{ product.id }}" class="btn btn-primary my-2 w-100">{{ showSoldOut ? 'Ver' : 'Comprar' }}</a>
-      <button *ngIf="!showSoldOut" class="btn btn-secondary my-2 w-100" (click)="addToCart(product)">Adicionar ao Carrinho</button>
+      <a  routerLink="/products/{{ product.id }}" class="btn btn-Buy my-2 w-100">{{ showSoldOut ? 'Ver' : 'Comprar' }}</a>
+      <button *ngIf="!showSoldOut" class="btn btn-add-cart my-2 w-100" (click)="addToCart(product)">Adicionar ao Carrinho</button>
     </div>
   </div>
 </div>

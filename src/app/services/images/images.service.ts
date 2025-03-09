@@ -5,7 +5,8 @@ import { Image } from '../../interfaces/image';
   providedIn: 'root'
 })
 export class ImagesService {
-imagens:Image[]=[
+
+  imagens:Image[]=[
   { id: 1, productId: 1, imageUrl: 'https://picsum.photos/400/500?random=1' },
   { id: 2, productId: 1, imageUrl: 'https://picsum.photos/400/500?random=2' },
   { id: 3, productId: 2, imageUrl: 'https://picsum.photos/400/500?random=1' },
@@ -24,7 +25,7 @@ imagens:Image[]=[
   { id: 16, productId: 8, imageUrl: 'https://picsum.photos/400/500?random=2' },
   
 
-]
+  ]
   constructor() { }
   getImagesByProductId(productId: number): Image[] {
     const filteredImages = this.imagens.filter(image => image.productId === productId);
@@ -33,4 +34,5 @@ imagens:Image[]=[
     }
     return filteredImages; 
   }
+
 }

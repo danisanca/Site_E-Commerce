@@ -1,66 +1,88 @@
-<header class="container-fluid p-0 m-0" style="height: auto;">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<header class="container-fluid p-0 m-0" style="height: auto; min-height: 100px;">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary "style="height: auto; min-height: 100px;">
     <div class="container-fluid">
       <div class = "logo-container ms-1" >
         <img routerLink="/" src="assets/logo.png" alt="Logo" >
       </div>
       <div class="d-flex align-items-end justify-content-end">
         <!-- Botão de abertura do navbar -->
-          <div *ngIf="sizeCart >=1"  class="btn d-flex d-lg-none position-relative p-0 my-0 me-3 ms-0 " style="height: 42px; width: 42px;cursor: pointer;">
-            <i class="bi bi-cart d-flex m-auto position-relative"
-              routerLink="/cart" ></i>
+          <div *ngIf="sizeCart >=1"  class="content-go-cart d-flex d-lg-none position-relative p-0 my-0 me-3 ms-0 rounded-circle border-0 shadow-none" 
+            style="height: 42px; width: 42px; cursor: pointer;" routerLink="/cart">
+            <i class="bi bi-cart d-flex m-auto position-relative "></i>
   
-              <p class="m-0 text-black rounded-circle m-1 d-flex justify-content-center" 
+              <p class="text-cart m-0 rounded-circle m-1 d-flex justify-content-center  " 
               style="height: 18px; width: 18px;">
                 {{sizeCart}}
               </p>
           </div>
-        <button id="navbar-toggler-open" class="navbar-toggler p-0" type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarSupportedContent" 
-        aria-controls="navbarSupportedContent" 
-        aria-expanded="false" 
-        aria-label="Toggle navigation" style="height: 42px; width: 42px;">
-        <i class="navbar-toggler-icon" ></i>
-        </button>
-       
-     
-        <!-- Botão alternativo que será mostrado após o menu ser aberto -->
-        <button id="navbar-toggler-close" class="navbar-toggler p-0" 
-        type="button" aria-label="Close navigation" style="display: none; height: 42px; width: 42px;">
-          <i class="bi bi-x"></i>
-        </button>
+          <div class="d-flex d-lg-none">
+            <button id="navbar-toggler-open" class="navbar-toggler p-0" type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation" style="height: 42px; width: 42px;">
+            <i class="navbar-toggler-icon" ></i>
+            </button>
+           
+         
+            <!-- Botão alternativo que será mostrado após o menu ser aberto -->
+            <button id="navbar-toggler-close" class="navbar-toggler p-0" 
+            type="button" aria-label="Close navigation" style="display: none; height: 42px; width: 42px;">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        
         </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
+            <a class="nav-link" aria-current="page" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products">Produtos</a>
+            <a class="nav-link" routerLink="/products"routerLinkActive="active">Produtos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contact">Contato</a>
+            <a class="nav-link" routerLink="/contact"routerLinkActive="active">Contato</a>
+          </li>
+          <li class="nav-item" *ngIf="!isLoggedIn">
+            <a class="nav-link" routerLink="/login"routerLinkActive="active">login</a>
+          </li>
+          <li class="nav-item h-100" *ngIf="isLoggedIn">
+            <div class="dropdown pt-2 ps-1">
+              <a class="dropdown-toggle text-DropDown" 
+              (click)="toogleDropDown($event)" data-bs-toggle="dropdown" aria-expanded="false">
+              Minha Conta
+              </a>            
+              <ul #dropdownMenu [ngClass]="{'show': showDropdown}"  class="dropdown-menu show position-absolute w-50 w-lg-100 top-100">
+                <li><a class="dropdown-item" aria-disabled="true" >Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Sair</a></li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about">Sobre</a>
+            <a class="nav-link" routerLink="/payment"routerLinkActive="active">payment</a>
           </li>
+          
           
         </ul>
-        <div *ngIf="sizeCart >=1" class="d-none d-lg-flex position-relative p-0 my-0 me-3 ms-0" style="height: 42px; width: 42px; cursor: pointer;">
-          
-          <i  class="bi bi-cart d-flex m-auto position-relative"
-            routerLink="/cart" ></i>
+        <div *ngIf="sizeCart >=1" class="content-go-cart d-none d-lg-flex position-relative p-0 my-0 me-3 ms-0 rounded-circle border-0 shadow-none" 
+          style="height: 42px; width: 42px; cursor: pointer; outline: none;" routerLink="/cart">
+           <!-- Botão Tela Grande -->
+          <i  class="bi bi-cart d-flex m-auto position-relative "
+             ></i>
 
-            <p class="m-0 text-black rounded-circle m-1 d-flex justify-content-center" 
+            <p class="text-cart fw-bold m-0 text-black rounded-circle m-1 d-flex justify-content-center" 
             style="height: 18px; width: 18px;">
               {{sizeCart}}
             </p>
 
         </div>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <app-search-bar></app-search-bar>
+          <!--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+          <!--<button class="btn btnSearch" type="submit">Search</button>-->
         </form>
       </div>
     </div>

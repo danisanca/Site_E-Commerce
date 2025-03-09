@@ -1,0 +1,42 @@
+<div class="container-fluid p-0 m-0">
+    <div class="row p-0 m-0">
+        <div class="col-12 col-lg-8 m-0 py-3 px-2">
+
+        </div>
+        <div class="col-12 col-lg-4 m-0 py-3 px-2">
+            <div class="row py-3 px-1 m-0 d-flex card-resume">
+                <h4 class="fw-bold mt-3">Detalhe da Compra</h4>
+                <div class="mt-3 d-flex flex-column justify-content-between
+                     border-bottom border-1 border-dark">
+                    <ul class="py-0 px-2 m-0">
+                        <li *ngFor="let item of cartList" class="text-decoration-none list-unstyled">
+                            <div class="d-flex w-100 justify-content-between align-content-center
+                            item-List-Cart mt-2">
+                                <div>
+                                    <p class="p-0 m-0">{{item.product.name}} </p>
+                                    <small class="ms-2"><b>Quantidade: </b>{{item.quantity}}</small>
+                                </div>
+                                <p class="m-0 p-0 align-content-center">{{(item.quantity*item.finalPrice)| currency:'BRL'}}</p>
+                                
+                            </div>
+                            
+                        </li>
+                    </ul>
+                    <div class="w-100 mt-3">
+                        <div class="d-flex justify-content-between ">
+                            <p class="fw-bold">Sub-Total:</p>
+                            <p class="text-subTotal">{{finalPrice}}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="fw-bold">Total:</p>
+                            <p class="text-Total fw-bold" >{{finalPrice}}</p>
+                            </div>
+                        </div>
+                    </div>
+             </div>
+             <div class="row py-3 px-1 mb-0 mt-3 mx-0 d-flex justify-content-center">
+                 <a class="btn btn-finish-payment my-1 mx-0 w-75">Finalizar Pedido</a>
+              </div>
+        </div>
+    </div>
+</div>

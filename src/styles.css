@@ -1,3 +1,24 @@
+ /* Variaveis Globais*/
+:root{
+    --primary-color:#B88E2F;
+    --primary-color-300:#FFF3E3;
+    --primary-color-200:#F9F1E7;
+    --black90-color: #101010;
+    --gray-color: #9F9F9F;
+    /*Card*/
+    --primary-color-100: #3A3A3A;
+    --new-product-color: #2EC1AC;
+    --discount-color-300: #E97171;
+    --white-color: #F4F5F7;
+    /*Text*/
+    --gray-text-color: #9F9F9F;
+    --white-text-color: #ffffff;
+    --black90-text-color: #101010;
+    /*Star*/
+    --star-color:#FFC700;
+}
+
+ /*Configs Globais*/
 * {
     padding: 0;
     margin: 0;
@@ -33,3 +54,8 @@ html, body {
     -webkit-appearance: none;
     margin: 0;
   }
+  p {
+    font-size: 16px;
+    
+  }
+ 

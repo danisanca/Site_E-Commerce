@@ -1,5 +1,4 @@
-Em construção..
-## Falta
-- Sistema de carrinho
-- Configurar Arquivo .env
-- Ajustar layout do site(cores e padrao do texto)
+implementar sistema de login
+authenticação
+
+Ajustar o backend para pegar as rotas conforme services do angular.

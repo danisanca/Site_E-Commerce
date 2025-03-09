@@ -19,8 +19,8 @@
 
     <div class="row w-100 p-0 m-0 my-5">
         <div class="col-12 d-flex flex-column text-center justify-content-center p-5">
-            <h3>Entre em contato conosco</h3>
-            <p class="text-muted text-break">Para obter mais informações sobre nossos produtos e serviços. 
+            <h2 class="fw-bold ">Entre em contato conosco</h2>
+            <p class="text-break" style="color: var(--gray-text-color);">Para obter mais informações sobre nossos produtos e serviços. 
                 Sinta-se à vontade para nos enviar um e-mail.<br> Nossa equipe está sempre disponível para ajudá-lo. 
                 Não hesite!</p>
         </div>
@@ -32,26 +32,26 @@
              </div>
             <div class="col-6 col-lg-4 d-flex flex-column justify-content-center align-content-center mx-auto mx-lg-0 ps-lg-5 mb-5 mb-lg-0">
                 <div class="d-flex">
-                    <fa-icon [icon]="faMapLocation"></fa-icon>
+                    <fa-icon [icon]="faMapLocation" class="icon-Size"></fa-icon>
                     <div class="d-flex flex-column justify-content-center ms-2">
-                        <h3 class="">Endereço</h3>
+                        <h3 class="fw-bold">Endereço</h3>
                         <p class="">236 5th SE Avenue, New York NY10000,<br> United States</p>
                     </div>
                         
                 </div>
                 <div class="d-flex">
-                    <fa-icon [icon]="faPhone"> </fa-icon>
+                    <fa-icon [icon]="faPhone" class="icon-Size" > </fa-icon>
                     <div class="d-flex flex-column justify-content-center ms-2">
-                        <h3>Phone</h3>
+                        <h3 class="fw-bold">Phone</h3>
                         <p>Mobile: +(84) 546-6789</p>
                         <p>Hotline: +(84) 456-6789</p>
                     </div>
                     
                 </div>
                 <div class="d-flex">
-                    <fa-icon [icon]="faClock"></fa-icon>
+                    <fa-icon [icon]="faClock" class="icon-Size"></fa-icon>
                     <div class="d-flex flex-column justify-content-center ms-2">
-                        <h3>Tempo de trabalho</h3>
+                        <h3 class="fw-bold">Tempo de trabalho</h3>
                         <p>Monday-Friday: 9:00 - 22:00</p>
                         <p>Saturday-Sunday: 9:00 - 21:00</p>
                     </div>
@@ -63,64 +63,64 @@
                 </div>
              </div>
             <div class="col-12 col-lg-7 d-flex justify-content-center">
-                <form class="p-0 w-50">
+                <form class="p-0 w-75 w-lg-50">
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Nome</label>
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Nome</label>
                       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Meu nome...">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <label for="exampleInputEmail1" class="form-label fw-bold">Email</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email@example.com">
                       </div>
                     <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Assunto</label>
+                      <label for="exampleInputPassword1" class="form-label fw-bold">Assunto</label>
                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Duvida sobre valores...">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
+                        <label for="exampleFormControlTextarea1" class="form-label fw-bold">Mensagem</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Qual o valor?"></textarea>
                       </div>
-                    <button type="submit" class="btn btn-primary w-50">Enviar</button>
+                    <button type="submit" class="btn btn-send w-50">Enviar</button>
                   </form>
             </div>
         </div>
     </div>
     
-    <div class="row w-100 py-0 px-5 m-0 bg-warning bg-opacity-10" style="height: auto; min-height: 270px;">
+    <div class="row w-100 py-0 px-2 m-0 d-flex justify-content-center" style="height: auto; min-height: 270px; background-color: var(--primary-color-300);">
         
-                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-0 px-1 m-0 ">
+                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-2 px-1 m-0 ">
                     <img src="assets/contactPage/trophy.png" alt="" class="float-start"
                          style="width: 60px;">
                      <div class="ms-2">
-                        <h4>Alta Qualidade</h4>
-                        <p class="text-muted">Feito com materiais de primeira qualidade</p>
+                        <h4 class="fw-bold">Alta Qualidade</h4>
+                        <p style="color: var(--gray-text-color);">Feito com materiais de primeira qualidade</p>
                      
                      </div>
                 </div>
-                 <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-0 px-1 m-0">
+                 <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-2 px-1 m-0">
                     <img src="assets/contactPage/guarantee.png" alt="" class="float-start"
                         style="width: 60px;">
                     <div class="ms-2">
-                        <h4>Proteção de Garantia</h4>
-                        <p class="text-muted">Mais de 2 anos.</p>
+                        <h4 class="fw-bold">Proteção de Garantia</h4>
+                        <p style="color: var(--gray-text-color);">Mais de 2 anos.</p>
                     
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-sm-start py-0 px-1 m-0" >
+                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-sm-start py-2 px-1 m-0" >
                     <img src="assets/contactPage/shipping.png" alt="" class="float-start"
                         style="width: 60px;">
                     <div class="ms-2">
-                        <h4>Frete Grátis</h4>
-                        <p class="text-muted">Pedidos acima de R$:150</p>
+                        <h4 class="fw-bold">Frete Grátis</h4>
+                        <p style="color: var(--gray-text-color);">Pedidos acima de R$:150</p>
                     
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-0 px-1 m-0">
+                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center justify-content-start py-2 px-1 m-0">
                     <img src="assets/contactPage/customer-support.png" alt="" class="float-start"
                         style="width: 60px;">
                     <div class="ms-2">
-                        <h4>Suporte 24/7</h4>
-                        <p class="text-muted">Suporte Exclusivo</p>
+                        <h4 class="fw-bold">Suporte 24/7</h4>
+                        <p style="color: var(--gray-text-color);">Suporte Exclusivo</p>
                     
                     </div>
                 </div>

@@ -12,3 +12,16 @@
 .card-container img {
     transition: opacity 0.3s ease !important; 
 }
+.btn-Visualizar{
+    background-color: var(--primary-color) ;
+    color: var(--white-text-color) ;
+}
+.btn-Visualizar:hover{
+    background-color: var(--primary-color-300) ;
+    color: var(--primary-color) ;
+}
+.category-card{
+    background-color: var(--primary-color-300) ;
+    color: var(--primary-color) ;
+    opacity: 0.85;
+}

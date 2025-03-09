@@ -1,21 +1,22 @@
 <div class="container-fluid p-0 m-0">
     <div class="row p-0 m-0">
-        <div class="col-12 d-flex position-relative align-items-center justify-content-center" style="height: 316px;">
-            <img src="assets/contactPage/bannerContact.png" alt="Banner de Produtos"
-            class="p-0 m-0 d-flex position-absolute top-0 start-0" style="z-index: 1; object-fit: cover;">
-            <div class="d-flex flex-column position-relative align-items-center justify-content-center"
-                 style="z-index: 2; height: 100%;">
-                <p class="fw-bold display-6">Produtos</p>
-                <div class="d-flex">
-                    <p class="fw-bold">Inicio</p>
-                    <p class="mx-2">></p>
-                    <p>Produtos</p>
-                </div>
-            </div>
+        <div class="col-12 position-relative" style="height: 316px;">
+
+            <img src="assets/contactPage/bannerContact.png" alt="bannerContact"
+                class="w-100 h-100 position-absolute top-0 start-0" 
+                style="object-fit: cover; z-index: 1;">
+            
+           <div class="d-flex flex-column position-relative 
+           align-items-center justify-content-center "
+                style="z-index: 2; height: 100%;">
+                <img src="assets/favicon.png" alt="">
+                <h1 class="text-center">Produtos</h1>
+                <p class="text-center"><b>Inicio</b> > Produtos</p>
+           </div>
         </div>
     </div>
-    <div class="row px-1 m-0 py-2 bg-danger-subtle d-flex position-relative align-content-around justify-content-start" 
-        style="height: auto; z-index: 2;">
+    <div class="row px-1 m-0 py-2 d-flex position-relative align-content-around justify-content-start" 
+        style="height: 72px; z-index: 2; background-color: var(--primary-color-300);">
        
         <div class="col-12 col-sm-4 col-lg-3 px-1 py-1 py-sm-0">
             <select class="form-select form-select-sm w-100"  
@@ -52,7 +53,7 @@
             </div>
             <div class="row px-0 py-4 m-0">
                 <div class="row w-100 p-0 m-0 d-flex justify-content-center mt-3">
-                    <app-card-product class="col-10 col-sm-5 col-lg-3 col-xl-2 mx-2 mb-5 
+                    <app-card-product class="ccol-11 col-sm-6 col-md-4 col-lg-3 px-2 mx-0 mt-2 
                         position-relative" *ngFor="let product of productList"
                         [product]="product"
                         [showSoldOut]="product.showSoldOut">
@@ -61,11 +62,11 @@
             </div>
         </div>
     </div>
-    <div class="row px-0 py-1 m-0">
+    <div class="row px-0 py-1 mx-0 mt-5">
         <div class="col-12 p-0 m-0 d-flex justify-content-center align-content-center">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <li class="page-item " [class.disabled]="currentPage === 1">
+              <li class="page-item" [class.disabled]="currentPage === 1">
                 <a class="page-link" (click)="changePage(currentPage - 1)">Anterior</a>
               </li>
       

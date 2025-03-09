@@ -6,11 +6,11 @@
             class=" w-100 h-100 position-absolute top-0 start-0" 
             style="object-fit: cover; z-index: 1;">
 
-            <div class=" col-8 col-sm-6 col-lg-4 text-start bg-warning bg-opacity-25 d-flex flex-column 
+            <div class=" col-8 col-sm-6 col-lg-4 text-start bg-card bg-opacity-25 d-flex flex-column 
                 position-relative p-3" style="z-index: 2; height: auto; ">
-                <p>New Arrival</p>
-                <h1 class="fw-bold text-warning">Discover Our New Collection</h1>
-                <p class="text-break">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <p class="text-notification">New Arrival</p>
+                <h1 class="fw-bold text-title">Discover Our New Collection</h1>
+                <p class="text-break text-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Ut elit tellus, luctus nec ullamcorper mattis.</p>
                 
             </div>
@@ -20,10 +20,10 @@
     <!--Lista de Categorias-->
     <div class="row p-0 m-0">
         <div class="col-12 d-flex flex-column text-center justify-content-center pt-2 pb-5 px-5">
-            <h2>Browse The Range</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h2 class="text-title-category">Categorias</h2>
+            <p class="text-subtitle-category">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <div class="row w-100 p-0 m-0">
-                <app-card-category class="col-10 col-lg-4 px-2 mx-auto"
+                <app-card-category class="col-10 col-sm-6 col-lg-4 px-2 mx-auto mt-2"
                 *ngFor="let category of categories"
                 [category]="category"
               ></app-card-category>
@@ -34,9 +34,9 @@
     <!--Lista de Categorias-->
     <div class="row p-0 m-0">
         <div class="col-12 d-flex flex-column text-center justify-content-center pt-2 pb-5 px-5">
-            <h2>Browse The Range</h2>
+            <h2 class="text-title-sugestions">Indicações de Produtos</h2>
             <div class="row w-100 p-0 m-0 d-flex justify-content-center mt-3">
-                <app-card-product class="col-10 col-sm-5 col-lg-3 col-xl-2 mx-2 mb-5 
+                <app-card-product class="col-11 col-sm-6 col-md-4 col-lg-3 px-2 mx-0 mt-2 
                     position-relative" *ngFor="let product of productList"
                     [product]="product"
                     [showSoldOut]="product.showSoldOut">

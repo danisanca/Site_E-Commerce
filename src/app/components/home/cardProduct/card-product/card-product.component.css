@@ -17,3 +17,24 @@
 .card-container:hover img {
     opacity: 0.6 !important; 
 }
+.text-discount{
+    color: var(--primary-color);
+    background-color: var(--primary-color-300);
+}
+.btn-Buy{
+    color: var(--primary-color-300);
+    background-color: var(--primary-color);
+}
+.btn-Buy:hover{
+    box-shadow: 1px 1px 10px var(--primary-color-200);
+}
+.btn-add-cart{
+    color: var(--primary-color);
+    background-color: var(--primary-color-300);
+}
+.btn-add-cart:hover{
+    box-shadow: 1px 1px 10px var(--primary-color-300);
+}
+.text-desc-Product{
+    color: var(--gray-text-color);
+}

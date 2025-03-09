@@ -10,6 +10,8 @@ import { Evidence } from '../../interfaces/evidence';
 import { StockService } from '../../services/stock/stock.service';
 import { Stock } from '../../interfaces/stock';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../services/cart/cart.service';
+import { CartItem } from '../../interfaces/cartItem';
 @Component({
   selector: 'app-product-details',
   imports: [RouterLink, CommonModule,FormsModule],
@@ -32,6 +34,8 @@ export class ProductDetailsComponent implements OnInit {
   quantity: number = 1; 
   maxQuantity:number=0;
   canBuy:boolean = false;
+  //Cart
+  onCart:boolean = false;
 
   changeImage(image: string) {
     this.selectedImage = image;
@@ -53,13 +57,13 @@ export class ProductDetailsComponent implements OnInit {
     private imagesService:ImagesService,
     private evidenceService: EvidencesService,
     private stockService: StockService,
+    private cartService:CartService,
     private route: ActivatedRoute,
     private router: Router){}
     
     increaseQuantity() {
       if(this.quantity < this.maxQuantity){
         this.quantity++;
-        console.log(this.quantity);
       }
     }
   
@@ -67,8 +71,22 @@ export class ProductDetailsComponent implements OnInit {
       if (this.quantity > 1) {
         this.quantity--;
       }
-  }
-
+    }
+    addToCart(product: Product) {
+        let finalPrice:number = 0;
+        if (product.discount != undefined) {
+          finalPrice = parseFloat((product.price - (product.discount.value * product.price) / 100).toFixed(2));
+          
+        } else {
+          finalPrice = parseFloat(product.price.toFixed(2));
+        }
+        const cartItem: CartItem = { idProduct:product.id, product, quantity: this.quantity, finalPrice };
+        this.cartService.addToCart(cartItem);
+        this.validOnCart();
+      }
+      removeItem(idProduct:number):void{
+        this.cartService.removeAllFromCart(idProduct);
+      }
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -86,10 +104,19 @@ export class ProductDetailsComponent implements OnInit {
         this.validStock();
       }    
 
-    this.images.forEach(element => {
-        console.log(element.imageUrl);
-      });
+    
     this.selectedImage = this.images[0].imageUrl;
+    this.validOnCart();
+  }
+  validOnCart(){
+    this.cartService.cart$.subscribe(items => {
+      if(items.find(i => i.idProduct === this.product.id)){
+        this.onCart = true;
+      }
+      else{
+        this.onCart = false;
+      }
+    });
   }
   validStock(){
     if(this.stock.amount > 0 && this.stock.status === "Ativo"){

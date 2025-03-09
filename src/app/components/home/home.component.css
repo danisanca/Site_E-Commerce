@@ -1,0 +1,24 @@
+.bg-card{
+background-color: var(--primary-color-300);
+}
+.text-notification{
+color: Var(--black90-text-color);
+font-weight: bold;
+}
+.text-title{
+    color: Var(--primary-color);
+    font-size: 52px;
+}
+.text-subtitle{
+    font-weight: 600;
+}
+/*Categoria*/
+.text-title-category{
+font-weight: bold;
+}
+.text-subtitle-category{
+    color: Var(--gray-text-color);
+}
+.text-title-sugestions{
+    font-weight: bold;
+}

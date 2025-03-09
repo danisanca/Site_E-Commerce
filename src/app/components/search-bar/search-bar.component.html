@@ -1,0 +1,24 @@
+<div class="position-relative d-flex">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Buscar produtos..."
+      [(ngModel)]="searchTerm" 
+      (input)="onSearch()"
+      (focus)="showDropdown = true"
+      (blur)="hideDropdownWithDelay()"
+      (keyup.enter)="searchOrNavigate()"
+    />
+  
+    <ul *ngIf="showDropdown && filteredProducts.length > 0" class="dropdown-menu show position-absolute w-100 top-100">
+      <li *ngFor="let product of filteredProducts" class="dropdown-item" (mousedown)="selectProduct(product)">
+        <div>
+          <h5>{{ product.name }}</h5>
+          <h6>{{ (product.discount?.value ? (product.price - (product.price * product.discount!.value / 100)) : product.price) | currency:'BRL' }}</h6>
+        </div>
+      </li>
+    </ul>
+    <button class="btn btnSearch ms-1" type="button" (click)="searchOrNavigate()" >
+      <i class="bi bi-search"></i> <!-- Ícone do Bootstrap -->
+    </button>
+  </div>

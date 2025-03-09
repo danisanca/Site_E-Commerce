@@ -2,7 +2,7 @@ import { Component, OnInit,} from '@angular/core';
 import { CartItem } from '../../../interfaces/cartItem';
 import { CartService } from '../../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -26,7 +26,14 @@ calcResume():void{
   }).format(newValue);
 }
  
-  constructor(private cartService:CartService){}
+  constructor(
+    private cartService:CartService,
+    private router: Router){}
+
+  goToPayment():void{
+    this.router.navigate(['/payment'])
+  }
+
 
   decreaseQuantity(idCart:number):void{
     this.cartService.removeFromCart(idCart);

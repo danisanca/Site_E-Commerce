@@ -16,10 +16,10 @@
             <div class="row">
              
               <div class="col-md-2 d-flex flex-row align-items-center
-              col-12 flex-md-column justify-content-center mb-3 mb-md-0">
+              col-12 flex-md-column justify-content-center my-2 my-md-0">
                 <img *ngFor="let img of images"
                      [src]="img.imageUrl"
-                     class="img-thumbnail mb-2"
+                     class="img-select rounded mb-2"
                      [class.selected]="img.imageUrl === selectedImage"
                      (click)="changeImage(img.imageUrl)"
                      alt="Miniatura do Produto">
@@ -33,7 +33,7 @@
           
               <div class="col-md-4 mt-5 mt-md-0 px-3">
                 <h1>{{ product.name }}</h1>
-                <h3 class="text-black-50">{{ product.price | currency:'BRL' }}</h3>
+                <h4 style="color: var(--gray-text-color);">{{ product.price | currency:'BRL' }}</h4>
                 <div class="row d-flex align-items-center">
                     <div style="width: auto;">
                         <span *ngFor="let star of [1, 2, 3, 4, 5]" 
@@ -47,10 +47,10 @@
                      </div>
                     <p class="my-0 mx-2 p-0 text-decoration-none text-black"style="width: auto;">|</p>
                    
-                    <p class="m-0 p-0 ms-3" style="width: auto;">{{numberAvaliations}} Avaliações</p>  
+                    <p class="m-0 p-0 ms-3" style="width: auto; color: var(--gray-text-color);">{{numberAvaliations}} Avaliações</p>  
                 </div>
                
-                <p>{{ product.description }}</p>
+                <p >{{ product.description }}</p>
                 <!-- Opção de Cores
                 
                 <div class="col-12 d-flex  m-0 p-0 ">
@@ -68,18 +68,25 @@
                   </div>
                 </div>
                 -->
+                
                 <div class="row d-flex w-100 flex-column py-3 justify-content-center align-content-start ms-2">
                   <div class="d-flex gap-1 align-content-center justify-content-center p-0 mx-0 my-2" style="width: auto;">
-                    <button (click)="decreaseQuantity()" class="btn-selector">-</button>
-                    <input type="number" [(ngModel)]="quantity" min="1" class="no-arrows" [disabled]="canBuy === false">
-                    <button (click)="increaseQuantity()" class="btn-selector">+</button>
+                    <div class="content-quantity d-flex align-content-center justify-content-center p-1">
+                      <button (click)="decreaseQuantity()" class="btn-selector">-</button>
+                      <input type="number" [(ngModel)]="quantity" min="1" class="no-arrows border-0" [disabled]="canBuy === false">
+                      <button (click)="increaseQuantity()" class="btn-selector">+</button>
+                    </div>
+                    
                     <p class="p-0 my-0 ms-2 me-0 align-content-center">{{stock.amount}} Disponivel</p>
                   </div>
-                  <button class="btn btn-primary w-50 my-2" [disabled]="canBuy === false">
-                    {{ canBuy ? 'Comprar' : 'Indisponível' }}
+                  <button *ngIf="onCart == false" (click)="addToCart(product)" class="btn btn-add-cart w-50 my-2" [disabled]="canBuy === false">
+                    {{ canBuy ? 'Adicionar ao Carrinho' : 'Indisponível' }}
                   </button>
-                  <button *ngIf="canBuy" class="btn btn-secondary w-50 my-2">
-                    Adicionar ao Carrinho
+                  <button *ngIf="onCart == true" (click)="removeItem(product.id!)" class="btn btn-remove-cart w-50 my-2">
+                   Remover do Carrinho
+                  </button>
+                  <button *ngIf="canBuy" class="btn btn-go-cart w-50 my-2 " routerLink="/cart">
+                    Ver ao Carrinho
                   </button>
                 </div>
                 
@@ -90,16 +97,16 @@
     </div>
     
      <!--Avaliações-->
-    <div class="row p-0 m-0 border border-top">
-      <p class="text-center mt-4 mb-5 display-6">Avaliações [{{numberAvaliations}}]</p>
+    <div class="row p-0 m-0 ">
+      <p class="text-center mt-4 mb-5 display-6 fw-bold">Avaliações [{{numberAvaliations}}]</p>
       <ul class="list-group d-flex justify-content-center align-items-center list-unstyled">
         <li *ngFor="let evidence of evidences" class="col-8 mb-4">
           <div class="border-top">
             <div class="d-flex justify-content-between">
               <p class="fw-bold text-start mt-2">{{evidence.username}}</p>
-              <p class="text-start mt-2">{{evidence.createdAt}}</p>
+              <p class="text-start mt-2" >{{evidence.createdAt}}</p>
             </div>
-            <p>{{evidence.description}}</p>
+            <p style="color: var(--gray-text-color);">{{evidence.description}}</p>
           </div>
         </li>
       </ul>

@@ -19,7 +19,6 @@ stocks:Stock[]=[
   constructor() { }
   
   getStockByProductId(id: number): Stock {
-      console.log('Ativando Service.')
       const findStock = this.stocks.find((stock) => stock.id === id);
       if (!findStock) {
         throw new Error(`Product with id ${id} not found`);

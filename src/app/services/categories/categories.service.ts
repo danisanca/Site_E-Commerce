@@ -14,7 +14,6 @@ export class CategoriesService {
 
   constructor() { }
   getAllCategories(): Category[] {
-      console.log('Ativando Service.')
       return this.categories;
     }
 }

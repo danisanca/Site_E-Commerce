@@ -1,0 +1,12 @@
+.icon-Size{
+    font-size: 24px;
+}
+.btn-send{
+    background-color:var(--primary-color);
+    color: var(--white-text-color);
+}
+.btn-send:hover{
+    background-color:var(--primary-color-300);
+    color: var( --primary-color);
+    
+}

@@ -32,7 +32,6 @@ export class CardProductComponent implements OnInit{
       finalPrice = parseFloat(product.price.toFixed(2));
     }
     const cartItem: CartItem = { idProduct:product.id, product, quantity: 1, finalPrice };
-    console.log(cartItem);
     this.cartService.addToCart(cartItem);
   }
 

@@ -7,4 +7,37 @@
     padding-right: 0;
     cursor: pointer;
  }
- 
+ .content-go-cart:hover .bi-cart {
+   text-shadow: 1px 1px 1px var(--primary-color);
+   color: var(--primary-color);
+}
+.content-go-cart:hover .text-cart {
+   text-shadow: 1px 1px 1px var(--primary-color);
+   color: var(--primary-color) !important;
+}
+
+ .bi-cart {
+   text-shadow: 1px 1px 1px black;
+}
+
+.text-DropDown{
+   color: var(--black90-text-color);
+   transition: color 0.1s ease-in-out;
+   text-decoration: none !important;
+   font-weight: bold;
+   
+}
+
+
+.nav-link.active {
+   color: var(--primary-color) !important; /* Azul Bootstrap */
+   font-weight: bold;
+}
+.nav-link:hover {
+   font-weight: bold; /* Azul mais escuro no hover */
+}
+.nav-link {
+   transition: color 0.1s ease-in-out;
+   color: var(--black90-text-color);
+}
+

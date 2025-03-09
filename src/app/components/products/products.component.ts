@@ -42,18 +42,25 @@ export class ProductsComponent implements OnInit {
     private router: Router) { }
     
   ngOnInit(): void {
-    const state = history.state;
-    if (state && state.categorySelected) {
-      this.categorySelected = state.categorySelected;
-      console.log(`Filtrando produtos pela categoria: ${this.categorySelected}`);
-      // Aqui você pode chamar um serviço para buscar produtos filtrados
-    }
+    
       this.products = this.productService.getAllProducts();
       this.stocks = this.stockService.getAllStocks();
       this.cartegories = this.categoriesService.getAllCategories();
       this.showResultFilter();
       this.productList = this.products;
       this.updateListProducts();
+      const state = history.state;
+      if (state && state.categorySelected) {
+        let category = state.categorySelected;
+        category = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+        const isValidCategory = this.cartegories.some(cat => cat.name.toLowerCase() === category.toLowerCase());
+
+        if (isValidCategory) {
+          this.categorySelected = category;
+        } else {
+          this.categorySelected = ""; 
+        }
+      }
   }
 
   //OnChangeFunctions

@@ -1,0 +1,29 @@
+.btn-clean-cart{
+    background-color: var(--discount-color-300);
+    color: var(--white-text-color);
+    border: 1px solid var(--primary-color);
+}
+.btn-clean-cart:hover{
+    background-color: var(--primary-color);
+    color: var(--primary-color-300);
+}
+.item-List-Cart{
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+}
+.btn-remove{
+    background-color: var(--primary-color-300);
+    color: var(--primary-color);
+}
+.card-resume{
+    border: 1px solid var(--primary-color-200);
+    border-radius: 8px;
+}
+.btn-go-payment{
+    background-color: var(--primary-color-300);
+    color: var(--primary-color);
+}
+.btn-go-product{
+    background-color: var(--primary-color);
+    color: var(--primary-color-300);
+}

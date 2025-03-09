@@ -1,0 +1,13 @@
+.btn-finish-payment{
+    background-color: var(--primary-color);
+    color: var(--primary-color-300);
+}
+.text-subTotal{
+    color: var(--primary-color);
+}
+.text-Total{
+    color: var(--primary-color);
+}
+.item-List-Cart{
+    border-bottom: 1px solid var(--gray-color);
+}

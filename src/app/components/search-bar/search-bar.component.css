@@ -1,0 +1,12 @@
+.btnSearch{
+    background-color: var(--primary-color);
+    color: var(--white-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnSearch:hover{
+ background-color: var(--primary-color-300);
+ color: var(--primary-color);
+ font-weight: bold;
+}

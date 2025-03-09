@@ -5,3 +5,9 @@
 .container-fluid{
     height: 20vh;
 }
+.footer-content{
+    border-top: 1px solid var(--gray-color);
+}
+.links-footer:hover{
+    color: var(--primary-color);
+}

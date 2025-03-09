@@ -106,16 +106,20 @@ export class ProdutosService {
 
   // Método para buscar os itens
   getAllProducts(): Product[] {
-    console.log('Ativando Service.')
     return this.products;
   }
   getProductsById(id: number): Product {
-    console.log('Ativando Service.')
     const product = this.products.find((product) => product.id === id);
     if (!product) {
       throw new Error(`Product with id ${id} not found`);
     }
     return product;
     
+  }
+  getProductsByName(name: string): Product[] {
+    const filtered = this.products.filter(p => 
+      p.name.toLowerCase().includes(name.toLowerCase())
+    );
+    return filtered;
   }
 }
