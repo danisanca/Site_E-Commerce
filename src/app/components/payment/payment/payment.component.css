@@ -11,3 +11,6 @@
 .item-List-Cart{
     border-bottom: 1px solid var(--gray-color);
 }
+.text-data-card{
+    color: var(--primary-color);
+}

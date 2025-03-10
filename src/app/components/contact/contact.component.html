@@ -64,21 +64,21 @@
              </div>
             <div class="col-12 col-lg-7 d-flex justify-content-center">
                 <form class="p-0 w-75 w-lg-50">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label fw-bold">Nome</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Meu nome...">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="inputName" aria-describedby="inputName">
+                      <label for="inputName">Nome</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label fw-bold">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email@example.com">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="inputEmail">
+                        <label for="inputEmail" class="form-label">Email</label>
                       </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label fw-bold">Assunto</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Duvida sobre valores...">
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="inputPassword">
+                      <label for="inputPassword" class="form-label">Assunto</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label fw-bold">Mensagem</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Qual o valor?"></textarea>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
+                        <label for="inputMessage" class="form-label">Mensagem</label>
                       </div>
                     <button type="submit" class="btn btn-send w-50">Enviar</button>
                   </form>
