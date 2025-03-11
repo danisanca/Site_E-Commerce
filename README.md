@@ -19,7 +19,7 @@ Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap
 
 ## 🌟 Em Construção
 
-- **Finalização da parte de pagamento**: Implementação do fluxo de pagamento.
+- **Layout**: Ajuste na responsividade.
 
 ## 💡 Funcionalidades Futuras
 

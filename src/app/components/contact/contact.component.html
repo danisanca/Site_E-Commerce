@@ -65,22 +65,22 @@
             <div class="col-12 col-lg-7 d-flex justify-content-center">
                 <form class="p-0 w-75 w-lg-50">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="inputName" aria-describedby="inputName">
+                      <input type="text" class="form-control" id="inputName" aria-describedby="inputName" [(ngModel)]="messageContact.name" name="name">
                       <label for="inputName">Nome</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="inputEmail">
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="inputEmail" [(ngModel)]="messageContact.email" name="email">
                         <label for="inputEmail" class="form-label">Email</label>
                       </div>
                     <div class="form-floating mb-3">
-                      <input type="password" class="form-control" id="inputPassword">
-                      <label for="inputPassword" class="form-label">Assunto</label>
+                      <input type="text" class="form-control" id="inputSubject" [(ngModel)]="messageContact.subject" name="subject">
+                      <label for="inputSubject" class="form-label">Assunto</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
+                        <textarea class="form-control" id="inputMessage" rows="3" style="height: 192px;" [(ngModel)]="messageContact.message" name="message"></textarea>
                         <label for="inputMessage" class="form-label">Mensagem</label>
                       </div>
-                    <button type="submit" class="btn btn-send w-50">Enviar</button>
+                    <button type="submit" class="btn btn-send w-50 mt-2" (click)="sendMessage()">Enviar</button>
                   </form>
             </div>
         </div>
