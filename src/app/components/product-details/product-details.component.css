@@ -122,3 +122,15 @@
     background-color: var(--discount-color-300);
     color: var(--white-text-color);
   }
+
+  @media (min-width: 992px) {
+  .btn-add-cart {
+    width: 50% !important;
+  }
+  .btn-go-cart {
+    width: 50% !important;
+  }
+  .btn-remove-cart {
+    width: 50% !important;
+  }
+}

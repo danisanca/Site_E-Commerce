@@ -15,10 +15,33 @@ font-weight: bold;
 /*Categoria*/
 .text-title-category{
 font-weight: bold;
+position: relative;
+display: inline-block; 
+padding-bottom: 10px
 }
+.text-title-category::after{
+    content: "";
+    display: block;
+    width: 192px; /* Define o tamanho da linha */
+    height: 3px; /* Define a espessura da linha */
+    background-color: var(--primary-color); /* Usa a cor primária do Bootstrap */
+    margin: 8px auto 0; /* Centraliza a linha */
+}
+
 .text-subtitle-category{
     color: Var(--gray-text-color);
 }
 .text-title-sugestions{
     font-weight: bold;
+    position: relative;
+    display: inline-block; 
+    padding-bottom: 10px
+}
+.text-title-sugestions::after{
+    content: "";
+    display: block;
+    width: 192px; /* Define o tamanho da linha */
+    height: 3px; /* Define a espessura da linha */
+    background-color: var(--primary-color); /* Usa a cor primária do Bootstrap */
+    margin: 8px auto 0; /* Centraliza a linha */
 }

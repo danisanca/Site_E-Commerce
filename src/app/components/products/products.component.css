@@ -11,4 +11,13 @@
     color: var(--white-text-color) !important;
     border: 1px solid var(--primary-color) !important;
   }
-  
+  .list-filter{
+    background-color: var(--primary-color-300);
+    height: 128px;
+  }
+
+  @media (min-width: 576px) {
+    .list-filter{
+      height: 72px ;
+    }
+  }

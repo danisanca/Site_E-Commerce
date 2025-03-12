@@ -8,9 +8,24 @@
 .text-Total{
     color: var(--primary-color);
 }
-.item-List-Cart{
-    border-bottom: 1px solid var(--gray-color);
+.section-divider-item{
+    width: 90%;
+    height: 2px;
+    background-color: var(--gray-color); /* Cor do Bootstrap */
+    margin: 10px 10px 0px 10px; /* Espaçamento superior e inferior */
+    border-radius: 5px; /* Borda arredondada */
 }
 .text-data-card{
     color: var(--primary-color);
 }
+.card-resume{
+    border: 1px solid var(--primary-color-200);
+    border-radius: 8px;
+}
+.section-divider {
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color-300); /* Cor do Bootstrap */
+    margin: 8px 16px; /* Espaçamento superior e inferior */
+    border-radius: 5px; /* Borda arredondada */
+  }

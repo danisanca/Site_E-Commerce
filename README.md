@@ -17,9 +17,6 @@ Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap
 - **Typescript**: Linguagem utilizada para garantir maior robustez no código.
 - **Autenticação de rotas**: Proteção de acesso com autenticação de usuário.
 
-## 🌟 Em Construção
-
-- **Layout**: Ajuste na responsividade.
 
 ## 💡 Funcionalidades Futuras
 

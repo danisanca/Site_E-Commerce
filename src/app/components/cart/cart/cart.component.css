@@ -4,8 +4,7 @@
     border: 1px solid var(--primary-color);
 }
 .btn-clean-cart:hover{
-    background-color: var(--primary-color);
-    color: var(--primary-color-300);
+    box-shadow: 2px 2px 5px var(--discount-color-300);
 }
 .item-List-Cart{
     border: 1px solid var(--primary-color);

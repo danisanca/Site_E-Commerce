@@ -15,8 +15,8 @@
            </div>
         </div>
     </div>
-    <div class="row px-1 m-0 py-2 d-flex position-relative align-content-around justify-content-start" 
-        style="height: 72px; z-index: 2; background-color: var(--primary-color-300);">
+    <div class="row px-1 m-0 list-filter d-flex position-relative align-content-center justify-content-start" 
+        style="z-index: 2;">
        
         <div class="col-12 col-sm-4 col-lg-3 px-1 py-1 py-sm-0">
             <select class="form-select form-select-sm w-100"  
@@ -30,7 +30,7 @@
                   </option>
             </select>
         </div>
-        <div class="col-12 col-sm-4 col-lg-3 px-1 py-12 py-sm-0"  >
+        <div class="col-12 col-sm-4 col-lg-3 px-1 py-1 py-sm-0"  >
             <select class="form-select form-select-sm w-100"
                     aria-label="Small select example" 
                     style="height: 42px; width: auto"
@@ -53,7 +53,7 @@
             </div>
             <div class="row px-0 py-4 m-0">
                 <div class="row w-100 p-0 m-0 d-flex justify-content-center mt-3">
-                    <app-card-product class="ccol-11 col-sm-6 col-md-4 col-lg-3 px-2 mx-0 mt-2 
+                    <app-card-product class="col-11 col-sm-6 col-md-4 col-lg-3 px-2 mx-0 my-2 
                         position-relative" *ngFor="let product of productList"
                         [product]="product"
                         [showSoldOut]="product.showSoldOut">

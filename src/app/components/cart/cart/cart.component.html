@@ -3,7 +3,7 @@
         <div class="col-12 col-lg-8 m-0 py-3 px-2">
                 <div class="row m-0 px-1 py-1 d-flex justify-content-between">
                     <p class="h3 fw-bold pt-3 pb-0 px-2 " style="width: auto;">Lista de compras</p>
-                    <p (click)="clearCart()" class="btn btn-clean-cart my-3 mx-md-3 mx-2" style="width: 256px;">Limpar Carrinho</p>
+                  
                     
                     <div class="row mx-0 my-1 px-0 py-3 item-List-Cart" *ngFor="let cartItem of cartList">
                         <!--Imagem-->
@@ -55,6 +55,7 @@
                        
                     </div>
                     
+                    <p (click)="clearCart()" class="btn btn-clean-cart my-3 mx-md-3 mx-2" style="width: 256px;">Limpar Carrinho</p>
                 </div>
            
         </div>
