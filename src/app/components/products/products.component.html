@@ -25,7 +25,7 @@
                     [(ngModel)]="categorySelected"
                     (change)="onCategoryChange($event)">
                 <option value="" selected>Todos os Produtos</option>
-                <option *ngFor="let category of cartegories" [value]="category.name">
+                <option *ngFor="let category of categories" [value]="category.name">
                     {{ category.name }}
                   </option>
             </select>

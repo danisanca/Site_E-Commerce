@@ -16,5 +16,5 @@ export interface CardDetails {
     cardHolder: string;
     cardExpiration: string;
     cardCVC: string;
-    documentNumenber: string;
+    documentNumber: string;
 }

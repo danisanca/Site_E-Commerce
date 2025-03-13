@@ -16,7 +16,7 @@ export class SearchBarComponent  {
 
   searchTerm: string = '';
   filteredProducts: Product[] = [];
-  showDropdown = false;
+  showDropdown:Boolean = false;
 
   constructor(private productService: ProdutosService,private router: Router) {}
 
@@ -35,7 +35,7 @@ export class SearchBarComponent  {
   selectProduct(product: Product) {
     this.searchTerm = product.name;
     this.showDropdown = false;
-    this.router.navigate(['/products', product.id]); // Redireciona para a página de detalhes
+    this.router.navigate(['/products', product.id]); 
     this.searchTerm = "";
   }
 
@@ -45,10 +45,8 @@ export class SearchBarComponent  {
     const matchingProduct = this.filteredProducts.find(p => p.name.toLowerCase() === this.searchTerm.toLowerCase());
 
     if (matchingProduct) {
-      // Se houver um produto exato, vá para a página de detalhes
       this.router.navigate(['/products', matchingProduct.id]);
     } else {
-      // Caso contrário, vá para a página de categorias com a pesquisa
       this.router.navigate(['/products'], { state: { categorySelected: this.searchTerm } });
       this.searchTerm = "";
     }

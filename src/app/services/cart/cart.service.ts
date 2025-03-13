@@ -10,7 +10,7 @@ export class CartService {
   private cartSubject = new BehaviorSubject<CartItem[]>(this.getCartFromStorage());
 
   cart$ = this.cartSubject.asObservable();
-  constructor() {  } //this.clearCartOnInit();
+  constructor() { this.clearCartOnInit(); } 
   private getCartFromStorage(): CartItem[] {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];

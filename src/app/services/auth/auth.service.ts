@@ -12,7 +12,6 @@ export class AuthService {
   constructor(private router: Router) {}
 
   login(username: string, password: string): boolean {
-    // Simulação de autenticação (substitua pela chamada à API)
     if (username === 'admin' && password === '1234') {
       localStorage.setItem('user', JSON.stringify({ username }));
       this.isLoggedInSubject.next(true);

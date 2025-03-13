@@ -30,11 +30,11 @@
 
 
 .nav-link.active {
-   color: var(--primary-color) !important; /* Azul Bootstrap */
+   color: var(--primary-color) !important; 
    font-weight: bold;
 }
 .nav-link:hover {
-   font-weight: bold; /* Azul mais escuro no hover */
+   font-weight: bold; 
 }
 .nav-link {
    transition: color 0.1s ease-in-out;

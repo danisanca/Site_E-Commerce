@@ -16,6 +16,7 @@ export class PaymentComponent implements OnInit{
   cartList!:CartItem[];
    //Calculo Resumo
    finalPrice:string = "";
+   //Payment
    selectedPayment: string = '';
    address: string = 'Av. Brasil Bloco:21 Apt:1 - JD.Alvorada';
    postalCode: string = '13555-757';
@@ -26,7 +27,7 @@ export class PaymentComponent implements OnInit{
     private orderService: OrderService)
     {
     this.orderForm = this.fb.group({
-      typePayment: ['', Validators.required], // Opção padrão
+      typePayment: ['', Validators.required], 
       nickName: ['', Validators.required],
       cardNumber: ['', Validators.required],
       cardHolder: ['', Validators.required],
@@ -63,8 +64,8 @@ export class PaymentComponent implements OnInit{
   onSubmit():void {
     if (this.orderForm.valid) {
       const order: Order = {
-        userId: this.userId, // Pegue isso do usuário autenticado
-        cartList: this.cartList, // Substituir com os itens do carrinho
+        userId: this.userId, 
+        cartList: this.cartList, 
         typePayment: this.orderForm.value.typePayment,
         address: this.address,
         postalCode: this.postalCode,
@@ -78,7 +79,7 @@ export class PaymentComponent implements OnInit{
           cardHolder: this.orderForm.value.cardHolder,
           cardExpiration: this.orderForm.value.cardExpiration,
           cardCVC: this.orderForm.value.cardCVC,
-          documentNumenber: this.orderForm.value.documentNumenber,
+          documentNumber: this.orderForm.value.documentNumenber,
         };
       }
 

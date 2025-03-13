@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit,AfterViewInit {
   sizeCart!:number;
   cartList!:CartItem[];
   isLoggedIn: boolean = false;
-  showDropdown = false;
+  showDropdown: boolean = false;
 
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
 

@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
   textResultDetails:string = "";
   //Imports
   products!:Product[];
-  cartegories!:Category[];
+  categories!:Category[];
   stocks!:Stock[];
   productList!:any[];
   //-Filtros
@@ -37,15 +37,13 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService:ProdutosService,
     private categoriesService:CategoriesService,
-    private stockService: StockService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private stockService: StockService) { }
     
   ngOnInit(): void {
     
       this.products = this.productService.getAllProducts();
       this.stocks = this.stockService.getAllStocks();
-      this.cartegories = this.categoriesService.getAllCategories();
+      this.categories = this.categoriesService.getAllCategories();
       this.showResultFilter();
       this.productList = this.products;
       this.updateListProducts();
@@ -53,7 +51,7 @@ export class ProductsComponent implements OnInit {
       if (state && state.categorySelected) {
         let category = state.categorySelected;
         category = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
-        const isValidCategory = this.cartegories.some(cat => cat.name.toLowerCase() === category.toLowerCase());
+        const isValidCategory = this.categories.some(cat => cat.name.toLowerCase() === category.toLowerCase());
 
         if (isValidCategory) {
           this.categorySelected = category;

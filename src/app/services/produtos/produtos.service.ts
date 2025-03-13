@@ -104,7 +104,7 @@ export class ProdutosService {
 
   constructor() {}
 
-  // Método para buscar os itens
+  
   getAllProducts(): Product[] {
     return this.products;
   }

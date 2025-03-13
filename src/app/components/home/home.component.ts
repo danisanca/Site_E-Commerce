@@ -17,9 +17,7 @@ import { StockService } from '../../services/stock/stock.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-   //Variaveis de Visualização
   canShow: boolean = true;
-   //Imports
   categories: Category[] = [];
   products: Product[] = [];
   stocks!:Stock[];
@@ -37,12 +35,10 @@ export class HomeComponent implements OnInit {
   
   updateListProducts(){
     
-      //Cria uma map de produtos com o parametro showSoldOut
       let filterProducts = this.products.map(product => ({
         ...product,
         showSoldOut: !this.findStock(product.id!)
       }));
-    //Regra para sugerir produtos
     this.productList = filterProducts
     .sort(() => Math.random() - 0.5) 
     .slice(0, 4);;
