@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Evidence } from '../../interfaces/evidence';
+import { environment } from '../../../environments/environment';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Response } from '../../interfaces/Response';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvidencesService {
-  evidences:Evidence[]=[
-    { id: 1, productId: 1,username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"},
-    { id: 2, productId: 1, username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"},
-    { id: 3, productId: 2, username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"},
-    { id: 4, productId: 2, username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"},
-    { id: 5, productId: 3, username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"},
-    { id: 6, productId: 3, username:"Anonimo", description:"Muito bom o produto, recomento muito", createdAt:"26/01/2025 13:31:18"}
-  ]
-
-  constructor() { }
+  private baseApiUrl = environment.apiUrl;
+    private apiUrl = `${this.baseApiUrl}/Evidence`;
+    
+    constructor(private http: HttpClient) { }
   
- getEvidencesByProductId(productId: number): Evidence[] {
-    const filteredEvidences = this.evidences.filter(evidence => evidence.productId === productId);
-    if (!filteredEvidences) {
-      throw new Error(`Product with id ${productId} not found`);
-    }
-    return filteredEvidences; 
+ getEvidencesByProductId(productId: number):  Observable<Response<Evidence[]>> {
+   const url = `${this.apiUrl}/GetAllEvidenceByProductId/${productId}`;
+       return this.http.get<Response<Evidence[]>>(url).pipe(
+         catchError(error => {
+           console.error('Erro ao buscar imagens:', error);
+           return throwError(() => new Error('Erro ao buscar imagens'));
+         })
+       );
   }
 
 }

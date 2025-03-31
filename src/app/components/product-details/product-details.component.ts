@@ -12,6 +12,7 @@ import { Stock } from '../../interfaces/stock';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem } from '../../interfaces/cartItem';
+import { response } from 'express';
 @Component({
   selector: 'app-product-details',
   imports: [RouterLink, CommonModule,FormsModule],
@@ -44,9 +45,9 @@ export class ProductDetailsComponent implements OnInit {
     this.selectedColor = color;
   }
   getStarType(star: number): string {
-    if (this.product.rating >= star) {
+    if (this.product.Rating >= star) {
       return 'full'; // Estrela cheia
-    } else if (this.product.rating >= star - 0.5) {
+    } else if (this.product.Rating >= star - 0.5) {
       return 'half'; // Meia estrela
     } else {
       return 'empty'; // Estrela vazia
@@ -74,13 +75,13 @@ export class ProductDetailsComponent implements OnInit {
     }
     addToCart(product: Product) {
         let finalPrice:number = 0;
-        if (product.discount != undefined) {
-          finalPrice = parseFloat((product.price - (product.discount.value * product.price) / 100).toFixed(2));
+        if (product.Discount != undefined) {
+          finalPrice = parseFloat((product.Price - (product.Discount.Value * product.Price) / 100).toFixed(2));
           
         } else {
-          finalPrice = parseFloat(product.price.toFixed(2));
+          finalPrice = parseFloat(product.Price.toFixed(2));
         }
-        const cartItem: CartItem = { idProduct:product.id, product, quantity: this.quantity, finalPrice };
+        const cartItem: CartItem = { idProduct:product.Id, product, quantity: this.quantity, finalPrice };
         this.cartService.addToCart(cartItem);
         this.validOnCart();
       }
@@ -94,23 +95,34 @@ export class ProductDetailsComponent implements OnInit {
       this.router.navigate(['/'])
       }
 
-    this.product = this.productService.getProductsById(id)
+     this.productService.getProductsById(id).subscribe(response =>{
+      this.product = response.data;
+     });
 
     if(this.product !=null||this.product !=undefined){
-        this.images = this.imagesService.getImagesByProductId(this.product.id!)
-        this.evidences = this.evidenceService.getEvidencesByProductId(this.product.id!);
-        this.stock = this.stockService.getStockByProductId(this.product.id!);
+
+        this.imagesService.getImagesByProductId(this.product.Id!).subscribe(response => {
+          const data = response.data;
+          this.images = data;
+        });
+
+        this.evidenceService.getEvidencesByProductId(this.product.Id!).subscribe(response=>{
+          this.evidences = response.data;
+        });
+        this.stockService.getStockByProductId(this.product.Id!).subscribe(response =>{
+          this.stock = response.data;
+        });
         this.numberAvaliations = this.evidences.length;
         this.validStock();
       }    
 
     
-    this.selectedImage = this.images[0].imageUrl;
+    this.selectedImage = this.images[0].url;
     this.validOnCart();
   }
   validOnCart(){
     this.cartService.cart$.subscribe(items => {
-      if(items.find(i => i.idProduct === this.product.id)){
+      if(items.find(i => i.idProduct === this.product.Id)){
         this.onCart = true;
       }
       else{

@@ -9,6 +9,7 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { StockService } from '../../services/stock/stock.service';
 import { Stock } from '../../interfaces/stock';
 import { CardProductComponent } from "../home/cardProduct/card-product/card-product.component";
+import { response } from 'express';
 
 
 @Component({
@@ -41,9 +42,13 @@ export class ProductsComponent implements OnInit {
     
   ngOnInit(): void {
     
-      this.products = this.productService.getAllProducts();
+    this.productService.getAllProducts().subscribe(response => {
+      this.products = response.data;
+    });
       this.stocks = this.stockService.getAllStocks();
-      this.categories = this.categoriesService.getAllCategories();
+      this.categoriesService.getAllCategories().subscribe(response => {
+        this.categories = response.data;
+      });
       this.showResultFilter();
       this.productList = this.products;
       this.updateListProducts();
@@ -77,13 +82,13 @@ export class ProductsComponent implements OnInit {
 
     // Filtra por categoria, se houver uma selecionada
     if (this.categorySelected !== "") {
-      filteredProducts = filteredProducts.filter(product => product.categoria === this.categorySelected);
+      filteredProducts = filteredProducts.filter(product => product.Categoria === this.categorySelected);
     }
 
     // Aplica a flag `showSoldOut`
     this.productList = filteredProducts.map(product => ({
       ...product,
-      showSoldOut: !this.findStock(product.id!) // Define se está esgotado
+      showSoldOut: !this.findStock(product.Id!) // Define se está esgotado
     }));
 
   // Aplica a ordenação com base em `orderMode`

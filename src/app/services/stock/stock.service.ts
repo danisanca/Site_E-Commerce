@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Stock } from '../../interfaces/stock';
+import { environment } from '../../../environments/environment';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Response } from '../../interfaces/Response';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
-stocks:Stock[]=[
-  { id: 1, productId: 1, amount:5, status: 'Ativo' },
-  { id: 2, productId: 2, amount:5, status: 'Desabilitado' },
-  { id: 3, productId: 3, amount:5, status: 'Ativo' },
-  { id: 4, productId: 4, amount:5, status: 'Ativo' },
-  { id: 5, productId: 5, amount:0, status: 'Ativo' },
-  { id: 6, productId: 6, amount:5, status: 'Ativo' },
-  { id: 7, productId: 7, amount:5, status: 'Ativo' },
-  { id: 8, productId: 8, amount:5, status: 'Ativo' },
-
-]
-  constructor() { }
+  private baseApiUrl = environment.apiUrl;
+  private apiUrl = `${this.baseApiUrl}/Stock/GetImageByProductId/`;
   
-  getStockByProductId(id: number): Stock {
-      const findStock = this.stocks.find((stock) => stock.id === id);
-      if (!findStock) {
-        throw new Error(`Product with id ${id} not found`);
-      }
-      return findStock;
+  constructor(private http: HttpClient) { }
+  
+  getStockByProductId(idproductId: number): Observable<Response<Stock>> {
+      const url = `${this.apiUrl}/${idproductId}`;
+      return this.http.get<Response<Stock>>(url).pipe(
+        catchError(error => {
+          console.error('Erro ao buscar imagens:', error);
+          return throwError(() => new Error('Erro ao buscar imagens'));
+        })
+      );
+          
     }
-  getAllStocks(): Stock[] {
-    return this.stocks.filter((stock) => stock.status === 'Ativo');
-  }
 }

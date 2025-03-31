@@ -33,11 +33,11 @@ export class CartService {
       existingItem.quantity = amount;
     } else {
       let newItem = item;
-      if (item.product.discount != undefined) {
-        newItem.product.price = parseFloat((item.product.price - (item.product.discount.value * item.product.price) / 100).toFixed(2));
+      if (item.product.Discount != undefined) {
+        newItem.product.Price = parseFloat((item.product.Price - (item.product.Discount.Value * item.product.Price) / 100).toFixed(2));
         
       } else {
-        newItem.product.price = parseFloat(newItem.product.price.toFixed(2));
+        newItem.product.Price = parseFloat(newItem.product.Price.toFixed(2));
       }
       this.cartItems.push(item);
     }

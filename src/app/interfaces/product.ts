@@ -1,14 +1,20 @@
+import { Stock } from "./stock";
+
 export interface Product{
-    id?:number;
-    shopId:number;
-    name:string;
-    price:number;
-    rating:number;
-    categoria:string;
-    imageUrl:string;
-    description:string;
+   
+    Id?:number;
+    ShopId:number;
+    NameShop:string;
+    Name:string;
+    Price:number;
+    Rating:number;
+    Categoria:string;
+    ImageUrl:string[];
+    Description:string;
     isNew:boolean;
-    discount?:{
-        value:number
+    Stock?:Stock;
+    Discount?:{
+        Value:number
     }
+    
 }

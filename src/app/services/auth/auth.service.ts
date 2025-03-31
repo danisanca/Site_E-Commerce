@@ -1,36 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Response } from '../../interfaces/Response';
+import { HttpClient } from '@angular/common/http';
+import { LoginResponse } from '../../interfaces/login';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkUserLoggedIn());
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  
-  constructor(private router: Router) {}
+   private baseApiUrl = environment.apiUrl;
+   private apiUrl = `${this.baseApiUrl}/Login`;
 
-  login(username: string, password: string): boolean {
-    if (username === 'admin' && password === '1234') {
-      localStorage.setItem('user', JSON.stringify({ username }));
-      this.isLoggedInSubject.next(true);
-      return true;
-    }
-    this.isLoggedInSubject.next(false);
-    return false;
+  constructor(private http: HttpClient) {}
+
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}`, { email, password }).pipe(
+      tap((response) => {
+        if (response.authenticated) {
+          localStorage.setItem('token', response.acessToken);
+          localStorage.setItem('user', JSON.stringify(response));
+        }
+      })
+    );
   }
 
   logout(): void {
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.router.navigate(['/']);
-    this.isLoggedInSubject.next(false);
   }
 
-  isAuthenticated(): boolean {
-    return localStorage.getItem('user') !== null;
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
-  private checkUserLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 }

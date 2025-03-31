@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 export class HeaderComponent implements OnInit,AfterViewInit {
   sizeCart!:number;
   cartList!:CartItem[];
+  @Input() AllProducts!: any[];
   isLoggedIn: boolean = false;
   showDropdown: boolean = false;
 
