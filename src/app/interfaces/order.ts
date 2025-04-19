@@ -7,14 +7,7 @@ export interface Order{
     typePayment:string;
     address:string;
     postalCode:string;
-    cardDetails?: CardDetails;
+    typeDocument?: string;
+    documentNumber?: string;
     date:Date;
-}
-export interface CardDetails {
-    nickName: string;
-    cardNumber: string;
-    cardHolder: string;
-    cardExpiration: string;
-    cardCVC: string;
-    documentNumber: string;
 }

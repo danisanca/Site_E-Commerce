@@ -16,7 +16,7 @@ export class SearchBarComponent  {
 
   searchTerm: string = '';
   @Input() AllProducts: Product[] = [];
-  filteredProducts!: Product[];
+  filteredProducts: Product[] = [] as Product[];
   showDropdown:Boolean = false;
 
   constructor(private productService: ProdutosService,private router: Router) {}
@@ -27,28 +27,27 @@ export class SearchBarComponent  {
       this.showDropdown = false;
       return;
     }
-
     this.filteredProducts = this.AllProducts.filter(product =>
-      product.Name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.showDropdown = this.filteredProducts.length > 0;
   }
 
 
   selectProduct(product: Product) {
-    this.searchTerm = product.Name;
+    this.searchTerm = product.name;
     this.showDropdown = false;
-    this.router.navigate(['/products', product.Id]); 
+    this.router.navigate(['/products', product.id]); 
     this.searchTerm = "";
   }
 
   searchOrNavigate() {
     if (!this.searchTerm.trim()) return;
 
-    const matchingProduct = this.filteredProducts.find(p => p.Name.toLowerCase() === this.searchTerm.toLowerCase());
+    const matchingProduct = this.filteredProducts.find(p => p.name.toLowerCase() === this.searchTerm.toLowerCase());
 
     if (matchingProduct) {
-      this.router.navigate(['/products', matchingProduct.Id]);
+      this.router.navigate(['/products', matchingProduct.id]);
     } else {
       this.router.navigate(['/products'], { state: { categorySelected: this.searchTerm } });
       this.searchTerm = "";

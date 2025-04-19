@@ -26,7 +26,6 @@ export class ProductsComponent implements OnInit {
   //Imports
   products!:Product[];
   categories!:Category[];
-  stocks!:Stock[];
   productList!:any[];
   //-Filtros
   categorySelected:string="";
@@ -41,18 +40,7 @@ export class ProductsComponent implements OnInit {
     private stockService: StockService) { }
     
   ngOnInit(): void {
-    
-    this.productService.getAllProducts().subscribe(response => {
-      this.products = response.data;
-    });
-      this.stocks = this.stockService.getAllStocks();
-      this.categoriesService.getAllCategories().subscribe(response => {
-        this.categories = response.data;
-      });
-      this.showResultFilter();
-      this.productList = this.products;
-      this.updateListProducts();
-      const state = history.state;
+    const state = history.state;
       if (state && state.categorySelected) {
         let category = state.categorySelected;
         category = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
@@ -64,6 +52,20 @@ export class ProductsComponent implements OnInit {
           this.categorySelected = ""; 
         }
       }
+
+    this.productService.getAllProducts().subscribe(response => {
+      this.products = response;
+      this.productList = response;
+      this.updateListProducts();
+    });
+    
+    this.categoriesService.getAllCategories().subscribe(response => {
+      this.categories = response;
+    });
+
+      this.showResultFilter();
+      
+      
   }
 
   //OnChangeFunctions
@@ -82,13 +84,13 @@ export class ProductsComponent implements OnInit {
 
     // Filtra por categoria, se houver uma selecionada
     if (this.categorySelected !== "") {
-      filteredProducts = filteredProducts.filter(product => product.Categoria === this.categorySelected);
+      filteredProducts = filteredProducts.filter(product => product.categoria === this.categorySelected);
     }
 
     // Aplica a flag `showSoldOut`
     this.productList = filteredProducts.map(product => ({
       ...product,
-      showSoldOut: !this.findStock(product.Id!) // Define se está esgotado
+      showSoldOut: !this.findStock(product) // Define se está esgotado
     }));
 
   // Aplica a ordenação com base em `orderMode`
@@ -111,9 +113,12 @@ export class ProductsComponent implements OnInit {
   this.showResultFilter();
   }
   //Verifica Estoque do produto
-  findStock(productId: number): boolean {
-    const stock = this.stocks.find(stock => stock.productId === productId);
-    return stock ? stock.amount > 0 : false;
+  findStock(product: Product): boolean {
+    if(product.stock != null){
+        return true;
+    }else{
+      return false;
+    }
   }
 
   changePage(page: number) {

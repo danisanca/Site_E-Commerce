@@ -19,7 +19,9 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        console.log('Login bem-sucedido:', res);
+        console.log('Login bem-sucedido');
+        console.log(res);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.error('Erro no login:', err);

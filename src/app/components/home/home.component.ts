@@ -19,31 +19,38 @@ import { response } from 'express';
 })
 export class HomeComponent implements OnInit {
   canShow: boolean = true;
-  categories: Category[] = [];
-  products: Product[] = [];
+  categories!: Category[];
+  products!: Product[] ;
   stocks!:Stock[];
   productList!:any[];
   constructor(private productService:ProdutosService,
     private categoriesService:CategoriesService,){}
   
   ngOnInit(): void {
+
+
     this.productService.getAllProducts().subscribe(response => {
-      this.products = response.data;
+      this.products = response;
+      this.updateListProducts(response);
     });
+
     this.categoriesService.getAllCategories().subscribe(response => {
-      this.categories = response.data;
+      this.categories = response;
     });
-    this.updateListProducts();
+    
+   
+    
   }
   
-  updateListProducts(){
-      let filterProducts = this.products.map(product => ({
+  updateListProducts(products:Product[]){
+      let filterProducts = products.map(product => ({
         ...product,
-        showSoldOut: product.Stock == null ? false : true
-      }));
-    this.productList = filterProducts
-    .sort(() => Math.random() - 0.5) 
-    .slice(0, 4);;
+        showSoldOut: product.stock == null ? true : false
+      })
+    
+  );
+    this.productList = filterProducts.sort(() => Math.random() - 0.5) 
+    .slice(0, 4);
   }
   
 }

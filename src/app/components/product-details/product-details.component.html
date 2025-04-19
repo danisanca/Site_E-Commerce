@@ -18,10 +18,10 @@
               <div class="col-md-2 d-flex flex-row align-items-center
               col-12 flex-md-column justify-content-center my-2 my-md-0">
                 <img *ngFor="let img of images"
-                     [src]="img.imageUrl"
+                     [src]="img.url"
                      class="img-select rounded mb-2 ms-2"
-                     [class.selected]="img.imageUrl === selectedImage"
-                     (click)="changeImage(img.imageUrl)"
+                     [class.selected]="img.url === selectedImage"
+                     (click)="changeImage(img.url)"
                      alt="Miniatura do Produto">
               </div>
           
@@ -50,7 +50,7 @@
                     <p class="m-0 p-0 ms-3" style="width: auto; color: var(--gray-text-color);">{{numberAvaliations}} Avaliações</p>  
                 </div>
                
-                <p >{{ product.description }}</p>
+                <p >{{product.description }}</p>
                 <!-- Opção de Cores
                 
                 <div class="col-12 d-flex  m-0 p-0 ">
@@ -70,19 +70,22 @@
                 -->
                 
                 <div class="row d-flex w-100 flex-column py-3 justify-content-center align-content-start ms-2">
-                  <div class="col-12 d-flex flex-column justify-content-center">
+                  <div *ngIf="!canBuy" class="col-12 d-flex flex-column">
+                      <p class="display-6 text-start text-avaliable">Indisponivel</p>
+                  </div>
+                  <div *ngIf="canBuy" class="col-12 d-flex flex-column justify-content-center">
 
                   <div class="d-flex gap-1 align-content-center justify-content-center p-0 mx-0 my-2" style="width: auto;">
                     <div class="content-quantity d-flex align-content-center justify-content-center p-1">
                       <button (click)="decreaseQuantity()" class="btn-selector">-</button>
-                      <input type="number" [(ngModel)]="quantity" min="1" class="no-arrows border-0" [disabled]="canBuy === false">
+                      <input type="number" [(ngModel)]="quantity" min="1" class="no-arrows border-0" >
                       <button (click)="increaseQuantity()" class="btn-selector">+</button>
                     </div>
                     
                     <p class="p-0 my-0 ms-2 me-0 align-content-center">{{stock.amount}} Disponivel</p>
                   </div>
 
-                  <button *ngIf="onCart == false" (click)="addToCart(product)" class="btn btn-add-cart w-75 my-2 mx-auto px-1" [disabled]="canBuy === false" >
+                  <button *ngIf="onCart == false" (click)="addToCart(product)" class="btn btn-add-cart w-75 my-2 mx-auto px-1"  >
                     {{ canBuy ? 'Adicionar ao Carrinho' : 'Indisponível' }}
                   </button>
                   <button *ngIf="onCart == true" (click)="removeItem(product.id!)" class="btn btn-remove-cart w-75 my-2 mx-auto px-1">

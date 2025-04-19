@@ -2,19 +2,19 @@ import { Stock } from "./stock";
 
 export interface Product{
    
-    Id?:number;
-    ShopId:number;
-    NameShop:string;
-    Name:string;
-    Price:number;
-    Rating:number;
-    Categoria:string;
-    ImageUrl:string[];
-    Description:string;
+    id?:number;
+    shopId:number;
+    nameShop:string;
+    name:string;
+    price:number;
+    rating:number;
+    categoria:string;
+    imageUrl:string[];
+    description:string;
     isNew:boolean;
-    Stock?:Stock;
-    Discount?:{
-        Value:number
+    stock?:Stock;
+    discount?:{
+        value:number
     }
     
 }

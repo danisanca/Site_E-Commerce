@@ -1,5 +1,3 @@
-
-
 export interface LoginResponse {
     authenticated: boolean;
     created: string;

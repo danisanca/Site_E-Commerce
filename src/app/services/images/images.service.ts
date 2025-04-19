@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Image } from '../../interfaces/image';
 import { environment } from '../../../environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Response } from '../../interfaces/Response';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,18 +10,13 @@ import { HttpClient } from '@angular/common/http';
 export class ImagesService {
 
   private baseApiUrl = environment.apiUrl;
-  private apiUrl = `${this.baseApiUrl}/Image`;
+  private apiUrl = `${this.baseApiUrl}/Payment`;
   
   constructor(private http: HttpClient) { }
 
-  getImagesByProductId(productId: number): Observable<Response<Image[]>> {
+  getImagesByProductId(productId: number): Observable<Image[]> {
     const url = `${this.apiUrl}/GetImageByProductId/${productId}`;
-    return this.http.get<Response<Image[]>>(url).pipe(
-      catchError(error => {
-        console.error('Erro ao buscar imagens:', error);
-        return throwError(() => new Error('Erro ao buscar imagens'));
-      })
-    );
+    return this.http.get<Image[]>(url);
   }
 
 }

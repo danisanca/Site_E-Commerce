@@ -25,29 +25,29 @@ export class CardProductComponent implements OnInit{
 
   addToCart(product: Product) {
     let finalPrice:number = 0;
-    if (product.Discount != undefined) {
-      finalPrice = parseFloat((product.Price - (product.Discount.Value * product.Price) / 100).toFixed(2));
+    if (product.discount != undefined) {
+      finalPrice = parseFloat((product.price - (product.discount.value * product.price) / 100).toFixed(2));
       
     } else {
-      finalPrice = parseFloat(product.Price.toFixed(2));
+      finalPrice = parseFloat(product.price.toFixed(2));
     }
-    const cartItem: CartItem = { idProduct:product.Id, product, quantity: 1, finalPrice };
+    const cartItem: CartItem = { idProduct:product.id, product, quantity: 1, finalPrice };
     this.cartService.addToCart(cartItem);
   }
 
   ngOnInit(): void {
    
-    this.price = this.product.Price;
+    this.price = this.product.price;
     
     // Verificando se o produto tem desconto
-    if (this.product.Discount != undefined) {
+    if (this.product.discount != undefined) {
       this.showDiscount = true;
-      this.priceEnd = parseFloat((this.price - (this.product.Discount.Value * this.price) / 100).toFixed(2));
-      this.percent = this.product.Discount.Value;
+      this.priceEnd = parseFloat((this.price - (this.product.discount.value * this.price) / 100).toFixed(2));
+      this.percent = this.product.discount.value;
       
     } else {
       this.showDiscount = false;
-      this.priceEnd = parseFloat(this.product.Price.toFixed(2));
+      this.priceEnd = parseFloat(this.product.price.toFixed(2));
       this.percent = 0;
     }
   }

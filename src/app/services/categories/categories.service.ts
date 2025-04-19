@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Category } from '../../interfaces/category';
 import { environment } from '../../../environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Response } from '../../interfaces/Response';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,8 +13,9 @@ export class CategoriesService {
   private apiUrl = `${this.baseApiUrl}/Categories`;
   
   constructor(private http: HttpClient) { }
-  getAllCategories(): Observable<Response<Category[]>>  {
-    return this.http.get<Response<Category[]>>(`${this.apiUrl}/GetAllActiveCategories`).pipe(
+
+  getAllCategories(): Observable<Category[]>  {
+    return this.http.get<Category[]>(`${this.apiUrl}/GetAllActiveCategories`).pipe(
             catchError(error => {
               console.error('Erro ao buscar imagens:', error);
               return throwError(() => new Error('Erro ao buscar imagens'));

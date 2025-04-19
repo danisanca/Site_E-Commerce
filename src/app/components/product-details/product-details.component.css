@@ -22,6 +22,10 @@
     
   }
   
+  .text-avaliable{
+    color: var(--primary-color);
+  }
+  
   .img-select:hover {
     transform: scale(1.1);
   }
