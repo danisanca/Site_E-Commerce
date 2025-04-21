@@ -1,17 +1,19 @@
+import { Product } from "./product";
+
 export interface PurchaseOrder
 {
     id?:number;
+    cartProducts:Item[];
+    priceTotal:number;
+    externalReference:string;
+    status:string;
     createdAt:Date;
-    item:Item;
 }
 export interface Item
 {
-    productId:number;
-    productName:string;
-    amount:number;
-    imageUrl:string;
-    description:string;
-    priceProduct:number;
-    priceTotal:number;
+    idProduct:number;
+    product:Product;
+    quantity:number;
+    finalPrice:string;
     
 }

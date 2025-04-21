@@ -17,4 +17,9 @@ private baseApiUrl = environment.apiUrl;
     const url = `${this.apiUrl}/GetAllHistoryPurchaseByUserId/${userId}`;
     return this.http.get<PurchaseOrder[]>(url);
   }
+  updateHistoryPurchase(external_ref: string, status: string): Observable<any> {
+    const url = `${this.apiUrl}/UpdateHistoryPurchase?external_ref=${external_ref}&status=${status}`;
+    return this.http.put(url, null); 
+  }
 }
+

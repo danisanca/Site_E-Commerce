@@ -21,6 +21,7 @@ export class PaymentComponent implements OnInit{
   cartList!:CartItem[];
    //Calculo Resumo
    finalPrice:string = "";
+   totalPrice:number = 0.0;
    user: User = createEmptyUser();
    //Payment
    selectedPayment: string = 'MercadoPago';
@@ -65,6 +66,7 @@ export class PaymentComponent implements OnInit{
     this.cartList.forEach(item => {
       newValue += (item.finalPrice*item.quantity);
     });
+    this.totalPrice = newValue;
     this.finalPrice = new Intl.NumberFormat('pt-BR', { 
       style: 'currency', 
       currency: 'BRL' 
@@ -81,6 +83,7 @@ export class PaymentComponent implements OnInit{
         const order: Order = {
           userId: userIdOnToken!, 
           cartList: this.cartList, 
+          finalPrice: this.totalPrice,
           typePayment: this.orderForm.value.typePayment,
           address: this.address,
           typeDocument: validDocument,

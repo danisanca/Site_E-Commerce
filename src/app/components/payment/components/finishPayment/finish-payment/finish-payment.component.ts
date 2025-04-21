@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MercadoPagoResponse } from '../../../../../interfaces/PaymentResponse';
 import { CartService } from '../../../../../services/cart/cart.service';
+import { HistorypurchaseService } from '../../../../../services/historypurchase/historypurchase.service';
 
 @Component({
   selector: 'app-finish-payment',
@@ -13,7 +14,9 @@ import { CartService } from '../../../../../services/cart/cart.service';
 export class FinishPaymentComponent implements OnInit {
   paymentResponse:MercadoPagoResponse =  {} as MercadoPagoResponse;
 
-  constructor(private route: ActivatedRoute, private cartService:CartService) {}
+  constructor(private route: ActivatedRoute, 
+    private cartService:CartService,
+    private historypurchaseService:HistorypurchaseService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -28,6 +31,8 @@ export class FinishPaymentComponent implements OnInit {
       this.paymentResponse.site_id = params['site_id'];
       this.paymentResponse.processing_mode = params['processing_mode'];
       this.paymentResponse.merchant_account_id = params['merchant_account_id'];
+
+      this.historypurchaseService.updateHistoryPurchase(this.paymentResponse.external_reference,this.paymentResponse.status).subscribe();
 
       this.cartService.clearCart();
     });

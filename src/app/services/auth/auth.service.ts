@@ -11,13 +11,21 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-   private baseApiUrl = environment.apiUrl;
-   private apiUrl = `${this.baseApiUrl}/Login`;
+  private baseApiUrl = environment.apiUrl;
+  private apiUrl = `${this.baseApiUrl}/Login`;
 
-   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticated()); 
-   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable(); 
- 
-  constructor(private http: HttpClient) {}
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  isLoggedIn$: Observable<boolean>;
+
+  constructor(private http: HttpClient) {
+    //-
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false); // inicializa antes
+    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+    
+    const isLogged = this.isAuthenticated();
+    this.isLoggedInSubject.next(isLogged);
+    
+  }
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}`, { email, password }).pipe(
@@ -26,7 +34,6 @@ export class AuthService {
           localStorage.setItem('token', response.acessToken);
           localStorage.setItem('user', JSON.stringify(response));
 
-          
           this.isLoggedInSubject.next(true);
         }
       })
@@ -37,32 +44,33 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 
-    this.isLoggedInSubject.next(false);
+    this.isLoggedInSubject.next(false); // agora com certeza já está instanciado
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
   isAuthenticated(): boolean {
     const userData = localStorage.getItem('user');
 
-  if (!userData) return false;
+    if (!userData) return false;
 
-  try {
-    const user = JSON.parse(userData);
-    const created = new Date(user.created);
-    const expiration = new Date(user.expiration);
-    const now = new Date();
+    try {
+      const user = JSON.parse(userData);
+      const created = new Date(user.created);
+      const expiration = new Date(user.expiration);
+      const now = new Date();
 
-    if (now >= created && now < expiration) {
-      return true;
-    } else {
+      if (now >= created && now < expiration) {
+        return true;
+      } else {
+        this.logout();
+        return false;
+      }
+    } catch (e) {
       this.logout();
       return false;
     }
-  } catch (e) {
-    this.logout(); 
-    return false;
-  }
   }
 }

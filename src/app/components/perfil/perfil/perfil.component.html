@@ -1,4 +1,4 @@
-<div class="container-fluid mx-5 my-0 p-0">
+<div class="container-fluid mx-5 my-0 p-0" style="height: auto; overflow: hidden;">
     <!-- Título dinâmico -->
   <div class="row mb-3">
     <div class="col">
@@ -42,7 +42,9 @@
               class="dropdown-menu w-50 position-absolute top-100"
               #dropdownMenu 
               [ngClass]="{'show': showDropdown}">
-              <li><a class="dropdown-item" routerLink="address" routerLinkActive="active" (click)="toogleDropDown($event)">Endereços</a></li>
+              <li><a class="dropdown-item" routerLink="infoUser" routerLinkActive="active" (click)="toogleDropDown($event)">Informações Pessoais</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="address" routerLinkActive="active" (click)="toogleDropDown($event)">Endereço</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" routerLink="historyPurchase" routerLinkActive="active" (click)="toogleDropDown($event)">Histórico de Compra</a></li>
             </ul>
@@ -52,7 +54,7 @@
 
     <!-- Conteúdo dinâmico -->
     <div class="container-dinamic col-10 col-md-8 bg-body-tertiary 
-      ms-0 ms-md-2 mt-3 mt-md-0">
+      ms-0 ms-md-2 mt-3 mt-md-0 h-100">
       <router-outlet></router-outlet>
     </div>
   </div>
