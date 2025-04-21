@@ -55,7 +55,7 @@
               Minha Conta
               </a>            
               <ul #dropdownMenu [ngClass]="{'show': showDropdown}"  class="dropdown-menu show position-absolute w-50 w-lg-100 top-100">
-                <li><a class="dropdown-item" aria-disabled="true" >Perfil</a></li>
+                <li><a class="dropdown-item" aria-disabled="true" routerLink="/perfil" >Perfil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Sair</a></li>
               </ul>
@@ -77,7 +77,7 @@
 
         </div>
         <form class="d-flex" role="search">
-          <app-search-bar></app-search-bar>
+          <app-search-bar [AllProducts]="AllProducts"></app-search-bar>
         </form>
       </div>
     </div>

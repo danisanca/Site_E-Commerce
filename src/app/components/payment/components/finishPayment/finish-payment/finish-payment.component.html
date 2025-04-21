@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row w-100 pt-5 m-0 text-center">
+    <div *ngIf="paymentResponse.status === 'approved'">
+      <h4>Pagamento aprovado com sucesso! 🎉</h4>
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-back-primary" [routerLink]="['/perfil/historyPurchase']" routerLinkActive="router-link-active">
+          Voltar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="paymentResponse.status === 'pending'">
+      <h4>Pagamento pendente! ⏳</h4>
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-back-primary" [routerLink]="['/perfil/historyPurchase']" routerLinkActive="router-link-active">
+          Voltar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="paymentResponse.status === 'rejected'">
+      <h4>Pagamento recusado! ❌</h4>
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-back-primary" [routerLink]="['/cart']" routerLinkActive="router-link-active">
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

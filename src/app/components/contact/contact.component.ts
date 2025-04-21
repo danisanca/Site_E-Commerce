@@ -18,6 +18,7 @@ export class ContactComponent{
   faMapLocation = faMapLocation;
   faPhone = faPhone;
   faClock = faClock;
+  
   messageContact:MessageContact = {
     name: '',
     email: '',

@@ -9,6 +9,7 @@ import { on } from 'events';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { Stock } from '../../interfaces/stock';
 import { StockService } from '../../services/stock/stock.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-home',
@@ -18,33 +19,38 @@ import { StockService } from '../../services/stock/stock.service';
 })
 export class HomeComponent implements OnInit {
   canShow: boolean = true;
-  categories: Category[] = [];
-  products: Product[] = [];
+  categories!: Category[];
+  products!: Product[] ;
   stocks!:Stock[];
   productList!:any[];
   constructor(private productService:ProdutosService,
-    private categoriesService:CategoriesService,
-    private stockService: StockService,){}
+    private categoriesService:CategoriesService,){}
   
   ngOnInit(): void {
-    this.products = this.productService.getAllProducts()
-    this.categories = this.categoriesService.getAllCategories()
-    this.stocks = this.stockService.getAllStocks();
-    this.updateListProducts();
+
+
+    this.productService.getAllProducts().subscribe(response => {
+      this.products = response;
+      this.updateListProducts(response);
+    });
+
+    this.categoriesService.getAllCategories().subscribe(response => {
+      this.categories = response;
+    });
+    
+   
+    
   }
   
-  updateListProducts(){
-    
-      let filterProducts = this.products.map(product => ({
+  updateListProducts(products:Product[]){
+      let filterProducts = products.map(product => ({
         ...product,
-        showSoldOut: !this.findStock(product.id!)
-      }));
-    this.productList = filterProducts
-    .sort(() => Math.random() - 0.5) 
-    .slice(0, 4);;
+        showSoldOut: product.stock == null ? true : false
+      })
+    
+  );
+    this.productList = filterProducts.sort(() => Math.random() - 0.5) 
+    .slice(0, 4);
   }
-  findStock(productId: number): boolean {
-    const stock = this.stocks.find(stock => stock.productId === productId);
-    return stock ? stock.amount > 0 : false;
-  }
+  
 }

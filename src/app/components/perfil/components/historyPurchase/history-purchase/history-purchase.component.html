@@ -1,0 +1,61 @@
+<div class="row w-100 m-0 p-0 ">
+    <div class="row p-0 m-0">
+        <p class="h4 fw-bold mt-3 info-Text text-center text-md-start">Minhas Compras</p>
+    </div>
+    <div class="row p-0 m-0">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <div class="accordion w-100" id="accordionPurchase">
+              <div *ngFor="let itemList of listPurchase; let i = index">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" [id]="'heading' + i">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                      <div class="row w-100">
+                        <div class="col-6">
+                          <strong>ID:</strong> {{ itemList.id }}
+                        </div>
+                        <div class="col-6 text-end">
+                          <strong>Data:</strong> {{ itemList.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+                        </div>
+                      </div>
+                    </button>
+                  </h2>
+              
+                  <div [id]="'collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionPurchase">
+                    <div class="accordion-body">
+                      <div *ngFor="let item of itemList.cartProducts">
+                        <div class="row item-List-Cart mt-1">
+                          <div class="row">
+                            <div class="col-3 col-lg-2 p-2 m-0">
+                              <img class="w-100" src="assets/about/frontLoja.png" alt="Frente da Loja" style="object-fit: cover; height: 88px;">
+                            </div>
+                            <div class="col-9 col-lg-6 py-0 px-1 m-0">
+                              <p class="fw-bold">{{ item.product.name }}</p>
+                              <p>{{ item.product.description }}</p>
+                            </div>
+                            <div class="col-12 col-lg-4 d-flex justify-content-center py-0 px-1 m-0">
+                              <div class="col-6 d-flex flex-column align-items-center">
+                                <p class="fw-bold mb-0">Quantidade</p>
+                                <span class="fw-bold">{{ item.quantity }}</span>
+                              </div>
+                              <div class="col-6 d-flex flex-column align-items-center">
+                                <p class="fw-bold mb-0">Preço à Vista:</p>
+                                <p class="fw-bold text-primary">
+                                  {{ item.finalPrice | currency: 'BRL' }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+              
+        </div>
+          
+    </div>
+</div>
+

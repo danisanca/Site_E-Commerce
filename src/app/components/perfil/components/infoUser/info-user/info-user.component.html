@@ -1,0 +1,50 @@
+<div class="row w-100">
+    
+    <div class="row py-4">
+        <div class="row text-center text-md-start mb-3">
+            <p class="h4 fw-bold info-Text">Meus Dados</p>
+        </div>
+        <div class="col-12 col-lg-7 d-flex justify-content-center">
+            <form class="p-0 w-75 w-lg-50">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="inputName" aria-describedby="inputName" [(ngModel)]="user.name" name="Name">
+                  <label for="inputName">Nome</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input disabled="true" type="email" class="form-control" id="inputEmail" aria-describedby="inputEmail" [(ngModel)]="user.email" name="Email">
+                    <label for="inputEmail" class="form-label">Email</label>
+                  </div>
+              
+                 
+                <button type="submit" class="btn btn-send w-50 mt-3" (click)="updateUser()">Atuaizar</button>
+              </form>
+              <hr>
+              
+        </div>
+    </div>
+    <div class="row py-4">
+        <div class="row text-center text-md-start mb-3">
+            <p class="h4 fw-bold info-Text">Alterar Senha</p>
+        </div>
+        <div class="col-12 col-lg-7 d-flex justify-content-center">
+            <form class="p-0 w-75 w-lg-50">
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="inputCurrentPassword" aria-describedby="inputCurrentPassword" [(ngModel)]="passwordForm.CurrentPassword" name="CurrentPassword">
+                  <label for="inputCurrentPassword">Senha Atual</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input  type="password" class="form-control" id="inputNewPassword" aria-describedby="inputNewPassword" [(ngModel)]="passwordForm.NewPassword" name="NewPassword">
+                    <label for="inputNewPassword" class="form-label">Nova Senha</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input  type="password" class="form-control" id="inputConfirmNewPassword" aria-describedby="inputConfirmNewPassword" [(ngModel)]="passwordForm.ConfirmNewPassword" name="ConfirmNewPassword">
+                    <label for="inputConfirmNewPassword" class="form-label">Confime a Nova Senha</label>
+                </div>
+              
+                 
+                <button type="submit" class="btn btn-send w-50 mt-3" (click)="changePassword()">Alterar Senha</button>
+              </form>
+              <hr>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container-fluid mx-5 my-0 p-0" style="height: auto; overflow: hidden;">
+    <!-- Título dinâmico -->
+  <div class="row mb-3">
+    <div class="col">
+      <h3 class="display-6 align-content-center text-center m-0" style="height: 72px;">{{ titulo }}</h3>
+    </div>
+  </div>
+
+  <!-- Conteúdo com menu lateral -->
+  <div class="row">
+    <!-- Menu lateral -->
+    <div class="menu-dinamic col-10 col-md-3 pt-3 pb-5 bg-body-tertiary d-none d-md-block">
+        <div class="row text-start">
+            <p>Daniel Mendonça</p>
+        </div>
+      <div class="list-group">
+        <a routerLink="infoUser" routerLinkActive="active" class="list-group-item list-group-item-action">
+          Informações Pessoais
+        </a>
+        <a routerLink="address" routerLinkActive="active" class="list-group-item list-group-item-action">
+          Endereço
+        </a>
+        <a routerLink="historyPurchase" routerLinkActive="active" class="list-group-item list-group-item-action">
+          Histórico de Compra
+        </a>
+      </div>
+    </div>
+    <div class="menu-dinamic col-10 mb-3 pt-3 pb-5 d-block d-md-none bg-body-tertiary ">
+        <div class="row text-center text-md-start">
+            <p>Daniel Mendonça</p>
+        </div>
+        <div class="row w-100 d-flex justify-content-center position-relative">
+          <div class="dropdown d-flex flex-column align-items-center position-relative px-1">
+            <button 
+              (click)="toogleDropDown($event)" 
+              class="btn btn-secondary dropdown-toggle w-50 " 
+              type="button" 
+              aria-expanded="false">
+              {{ titulo }}
+            </button>
+            <ul 
+              class="dropdown-menu w-50 position-absolute top-100"
+              #dropdownMenu 
+              [ngClass]="{'show': showDropdown}">
+              <li><a class="dropdown-item" routerLink="infoUser" routerLinkActive="active" (click)="toogleDropDown($event)">Informações Pessoais</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="address" routerLinkActive="active" (click)="toogleDropDown($event)">Endereço</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="historyPurchase" routerLinkActive="active" (click)="toogleDropDown($event)">Histórico de Compra</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <!-- Conteúdo dinâmico -->
+    <div class="container-dinamic col-10 col-md-8 bg-body-tertiary 
+      ms-0 ms-md-2 mt-3 mt-md-0 h-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

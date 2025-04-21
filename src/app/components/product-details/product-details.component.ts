@@ -12,6 +12,8 @@ import { Stock } from '../../interfaces/stock';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem } from '../../interfaces/cartItem';
+import { response } from 'express';
+import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-product-details',
   imports: [RouterLink, CommonModule,FormsModule],
@@ -19,10 +21,10 @@ import { CartItem } from '../../interfaces/cartItem';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
-  product!:Product;
-  images!:Image[];
-  stock!:Stock;
-  evidences!:Evidence[];
+  product: Product = {} as Product;
+  images:Image[] = [] as Image[];
+  stock:Stock = {} as Stock;
+  evidences:Evidence[] = [] as Evidence[];
   //Controle de Imagens
   selectedImage!:string;
   //Avaliações
@@ -37,21 +39,6 @@ export class ProductDetailsComponent implements OnInit {
   //Cart
   onCart:boolean = false;
 
-  changeImage(image: string) {
-    this.selectedImage = image;
-  }
-  selectColor(color: string) {
-    this.selectedColor = color;
-  }
-  getStarType(star: number): string {
-    if (this.product.rating >= star) {
-      return 'full'; // Estrela cheia
-    } else if (this.product.rating >= star - 0.5) {
-      return 'half'; // Meia estrela
-    } else {
-      return 'empty'; // Estrela vazia
-    }
-  }
   constructor(
     private productService:ProdutosService,
     private imagesService:ImagesService,
@@ -60,6 +47,37 @@ export class ProductDetailsComponent implements OnInit {
     private cartService:CartService,
     private route: ActivatedRoute,
     private router: Router){}
+    
+    ngOnInit(): void {
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+  
+      if(id === undefined || id <= 0){
+        this.router.navigate(['/'])
+        }
+  
+       this.productService.getProductsById(id).subscribe(response =>{
+        this.product = response;
+  
+        if(this.product !=null||this.product !=undefined){
+  
+          this.evidenceService.getEvidencesByProductId(this.product.id!).subscribe(response=>{
+            this.evidences = response;
+            this.numberAvaliations = this.evidences.length;
+          });
+          this.stockService.getStockByProductId(this.product.id!).subscribe(response =>{
+            this.stock = response;
+            this.validStock();
+          });
+  
+          this.imagesService.getImagesByProductId(this.product.id!).subscribe(response => {
+            this.images = response;
+            this.selectedImage = this.images[0].url;
+          });
+  
+          this.validOnCart();
+        }    
+       });
+    }
     
     increaseQuantity() {
       if(this.quantity < this.maxQuantity){
@@ -87,27 +105,23 @@ export class ProductDetailsComponent implements OnInit {
       removeItem(idProduct:number):void{
         this.cartService.removeAllFromCart(idProduct);
       }
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    if(id === undefined || id <= 0){
-      this.router.navigate(['/'])
+      changeImage(image: string) {
+        this.selectedImage = image;
       }
+      selectColor(color: string) {
+        this.selectedColor = color;
+      }
+      getStarType(star: number): string {
+        if (this.product?.rating >= star) {
+          return 'full'; 
+        } else if (this.product?.rating >= star - 0.5) {
+          return 'half'; 
+        } else {
+          return 'empty'; 
+        }
+      }
+  
 
-    this.product = this.productService.getProductsById(id)
-
-    if(this.product !=null||this.product !=undefined){
-        this.images = this.imagesService.getImagesByProductId(this.product.id!)
-        this.evidences = this.evidenceService.getEvidencesByProductId(this.product.id!);
-        this.stock = this.stockService.getStockByProductId(this.product.id!);
-        this.numberAvaliations = this.evidences.length;
-        this.validStock();
-      }    
-
-    
-    this.selectedImage = this.images[0].imageUrl;
-    this.validOnCart();
-  }
   validOnCart(){
     this.cartService.cart$.subscribe(items => {
       if(items.find(i => i.idProduct === this.product.id)){

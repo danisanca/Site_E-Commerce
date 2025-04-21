@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 export class HeaderComponent implements OnInit,AfterViewInit {
   sizeCart!:number;
   cartList!:CartItem[];
+  @Input() AllProducts!: any[];
   isLoggedIn: boolean = false;
   showDropdown: boolean = false;
 
@@ -65,17 +66,14 @@ export class HeaderComponent implements OnInit,AfterViewInit {
       });
     });
       togglerOpen?.addEventListener('click', () => {
-        // O menu será aberto, então mostramos o botão de fechar
         togglerClose.style.display = 'block';
         togglerOpen.style.display = 'none';
       });
       
       togglerClose?.addEventListener('click', () => {
-        // O menu será fechado, então mostramos o botão de abrir
         togglerOpen.style.display = 'block';
         togglerClose.style.display = 'none';
         
-        // Fecha o menu de forma programática
         collapseInstance.hide();
       });
    

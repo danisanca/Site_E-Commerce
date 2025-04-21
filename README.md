@@ -9,8 +9,9 @@ Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap
 - **Lista de indicação de Produtos**: Lista de produtos que podem ser definidos de forma aleatória ou especifica.
 - **Carinho de Compras**: Opção de adicionar os produtos no carrinho e visao geral de todos os produtos adicionados.
 - **Pagamento do Produto**: Depois de selecionar os produtos é possivel seguir para a forma de pagamento para aquele carrinhos.
-- **Rota de Pagamento por Authenticação**: Só é possivel avançar para a pagina de pagamento após fazer login (User:Admin - Senha:1234).
-- **Layout Responsivo**: Layout foi desenvolvido tanto para desktop quanto para mobile..
+- **Rota de Pagamento por Authenticação**: Só é possivel avançar para a pagina de pagamento após fazer login.
+- **Layout Responsivo**: Layout foi desenvolvido tanto para desktop quanto para mobile.
+- **Integração com Gateway de Pagamento**: Integração com mercado pago para pagamento.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -19,13 +20,8 @@ Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap
 - **Typescript**: Linguagem utilizada para garantir maior robustez no código.
 - **Autenticação de rotas**: Proteção de acesso com autenticação de usuário.
 
-
 ## 💡 Funcionalidades Futuras
-
-- **Integração com Gateway de Pagamento**: Implementação do fluxo de pagamento e integração com serviços de pagamento online.
 - **Testes unitários**: Planejamento para a implementação de testes unitários utilizando frameworks como Jasmine ou Karma.
-- **Branch com Backend**: Atualmente o síte funciona necessidade de banco de dados e backend. Porem ambos ja estão desenvolvidos para integração com o site.
-É necessario apenas ajustar as funções da services e indicar a endpoint.
 
 
 ## 🛠️ Instalação.

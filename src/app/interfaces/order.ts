@@ -4,17 +4,11 @@ export interface Order{
     id?:number;
     userId:number;
     cartList:CartItem[];
+    finalPrice:number;
     typePayment:string;
     address:string;
     postalCode:string;
-    cardDetails?: CardDetails;
+    typeDocument?: string;
+    documentNumber?: string;
     date:Date;
-}
-export interface CardDetails {
-    nickName: string;
-    cardNumber: string;
-    cardHolder: string;
-    cardExpiration: string;
-    cardCVC: string;
-    documentNumber: string;
 }

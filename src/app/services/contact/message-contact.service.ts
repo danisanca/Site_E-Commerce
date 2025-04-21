@@ -7,7 +7,8 @@ import { MessageContact } from '../../interfaces/messageContact';
 export class MessageContactService {
 
   constructor() { }
-
+  //Método para criar uma mensagem se solicitação de contato com a loja
+  //A ser implementado....
   createMessage(message:MessageContact): void{
      console.log(message);
   }

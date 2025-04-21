@@ -1,0 +1,39 @@
+<div class="row w-100">
+    
+    <div class="row py-4">
+        <div class="col-12 col-lg-7 d-flex justify-content-center">
+            <form class="p-0 w-75 w-lg-50">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="inputRua" aria-describedby="inputRua" [(ngModel)]="user.address.street" name="Rua">
+                  <label for="inputRua">Rua</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputComplemento" aria-describedby="inputComplemento" [(ngModel)]="user.address.complement" name="Complemento">
+                    <label for="inputComplemento" class="form-label">Complemento</label>
+                  </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="inputBairro" [(ngModel)]="user.address.neighborhood" name="Bairro">
+                  <label for="inputBairro" class="form-label">Bairro</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputCEP" [(ngModel)]="user.address.zipcode" name="CEP">
+                    <label for="inputCEP" class="form-label">CEP</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputCidade" [(ngModel)]="user.address.city" name="Cidade">
+                    <label for="inputCidade" class="form-label">Cidade</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputEstado" [(ngModel)]="user.address.state" name="Estado">
+                    <label for="inputEstado" class="form-label">Estado</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputCelular" [(ngModel)]="user.address.cellPhone" name="Celular">
+                    <label for="inputCelular" class="form-label">Celular</label>
+                  </div>
+               
+                <button type="submit" class="btn btn-send w-50 mt-5" (click)="updateUser()">Atuaizar</button>
+              </form>
+        </div>
+    </div>
+</div>

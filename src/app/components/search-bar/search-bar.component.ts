@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { ProdutosService } from '../../services/produtos/produtos.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -15,7 +15,8 @@ import { Router, RouterLink } from '@angular/router';
 export class SearchBarComponent  {
 
   searchTerm: string = '';
-  filteredProducts: Product[] = [];
+  @Input() AllProducts: Product[] = [];
+  filteredProducts: Product[] = [] as Product[];
   showDropdown:Boolean = false;
 
   constructor(private productService: ProdutosService,private router: Router) {}
@@ -26,8 +27,9 @@ export class SearchBarComponent  {
       this.showDropdown = false;
       return;
     }
-
-    this.filteredProducts = this.productService.getProductsByName(this.searchTerm);
+    this.filteredProducts = this.AllProducts.filter(product =>
+      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
     this.showDropdown = this.filteredProducts.length > 0;
   }
 

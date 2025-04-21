@@ -11,16 +11,21 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username:string = '';
+  email:string = '';
   password:string = '';
   
   constructor(private authService: AuthService, private router: Router) {}
   
-  onLogin() {
-    if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/']);
-    } else {
-      alert('Usuário ou senha inválidos!');
-    }
+  onLogin(): void {
+    this.authService.login(this.email, this.password).subscribe({
+      next: (res) => {
+        console.log('Login bem-sucedido');
+        console.log(res);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Erro no login:', err);
+      },
+    });
   }
 }

@@ -1,3 +1,4 @@
+@import 'ngx-toastr/toastr';
  /* Variaveis Globais*/
 :root{
     --primary-color:#B88E2F;
@@ -17,6 +18,8 @@
     /*Star*/
     --star-color:#FFC700;
 }
+
+
 
  /*Configs Globais*/
 * {
@@ -58,4 +61,32 @@ html, body {
     font-size: 16px;
     
   }
- 
+  /* Toasts Styles */
+  .toast-success {
+    background-color: #28a745 !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  
+  .toast-title {
+    font-size: 16px;
+  }
+  
+  .toast-message {
+    font-size: 14px;
+  }
+ /* Buttons Style */
+  .btn-send{
+    background-color:var(--primary-color);
+    color: var(--white-text-color);
+  }
+  .btn-back-primary{
+    background-color:var(--primary-color);
+    color: var(--white-text-color);
+  }
+  .btn-back-primary:hover{
+    background-color:var(--primary-color-200);
+    color: var(--primary-color);
+  }

@@ -1,0 +1,16 @@
+.text-DropDown{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: start;
+}
+.container-dinamic{
+    height: 72vh;
+}
+.menu-dinamic{
+    height: 192px;
+}
+@media (max-width: 768px) {
+    .menu-dinamic{
+        height: 128px;
+    }
+}
