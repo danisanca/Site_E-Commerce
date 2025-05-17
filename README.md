@@ -1,7 +1,7 @@
-# Site E-commerce com Angular
+# Plataforma de E-commerce
 
 ## 📄 Descrição
-Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap e Typescript. O objetivo principal é criar uma plataforma funcional e escalável para a venda de e compra de produtos online. O site foi baseado em um layout pronto ajustado e adaptado conforme necessidade.
+Este projeto é uma plataforma de e-commerce desenvolvido utilizando Angular, Bootstrap e Typescript. O objetivo principal é criar uma plataforma funcional e escalável para a venda de e compra de produtos online. O site foi baseado em um layout pronto ajustado e adaptado conforme necessidade.
 
 ## 🚀 Funcionalidades
 
