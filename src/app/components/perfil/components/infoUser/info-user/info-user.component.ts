@@ -15,9 +15,9 @@ import { ToastrService } from 'ngx-toastr';
 export class InfoUserComponent implements OnInit{
 user: User = createEmptyUser();
 passwordForm:ChangePassword ={
-  idUser:0,
-  CurrentPassword:'',
-  NewPassword:'',
+  userId:0,
+  currentPassword:'',
+  newPassword:'',
   ConfirmNewPassword:''
 }
 
@@ -32,10 +32,9 @@ ngOnInit(): void {
 updateUser() {
    var model:UserUpdate ={
     id: this.user.id,
-    name: this.user.name,
+    nomeCompleto: this.user.nomeCompleto,
     email: this.user.email,
   }
-  console.log('Dados atualizados:', model);
   this.userService.updateUser(model).subscribe({
     next: () => this.toastr.success('Usuario atualizado com sucesso!'),
     error: () => this.toastr.error('Erro ao atualizar o usuario.')
@@ -44,26 +43,24 @@ updateUser() {
 
 changePassword(){
   
-  if(this.passwordForm.NewPassword !== '' &&
+  if(this.passwordForm.newPassword !== '' &&
     this.passwordForm.ConfirmNewPassword !== '' &&
-    this.passwordForm.CurrentPassword !== ''){
-    if(this.passwordForm.NewPassword !== this.passwordForm.ConfirmNewPassword){ 
+    this.passwordForm.currentPassword !== ''){
+    if(this.passwordForm.newPassword !== this.passwordForm.ConfirmNewPassword){ 
         this.toastr.error('As senhas não coincidem!');
         this.passwordForm = {
-          idUser:0,
-          CurrentPassword:this.passwordForm.CurrentPassword,
-          NewPassword:'',
+          userId:0,
+          currentPassword:this.passwordForm.currentPassword,
+          newPassword:'',
           ConfirmNewPassword:''
         }
-        console.log('As senhas não coincidem!1');
         return;
         
       }else{
-        console.log('As senhas não coincidem!2');
         var model:ChangePassword = {
-          idUser:this.user.id!,
-          CurrentPassword:this.passwordForm.CurrentPassword,
-          NewPassword:this.passwordForm.NewPassword,
+          userId:this.user.id!,
+          currentPassword:this.passwordForm.currentPassword,
+          newPassword:this.passwordForm.newPassword,
           ConfirmNewPassword:this.passwordForm.ConfirmNewPassword
         }
         this.userService.ChangePassword(model).subscribe({
@@ -71,9 +68,9 @@ changePassword(){
           error: () => this.toastr.error('Erro ao atualizar a senha.')
         });
         this.passwordForm = {
-          idUser:0,
-          CurrentPassword:'',
-          NewPassword:'',
+          userId:0,
+          currentPassword:'',
+          newPassword:'',
           ConfirmNewPassword:''
         }
       }

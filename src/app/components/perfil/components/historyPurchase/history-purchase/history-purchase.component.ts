@@ -18,10 +18,10 @@ constructor(private historypurchaseService:HistorypurchaseService,private toastr
 
   ngOnInit(): void {
     let userIdOnToken = getUserIdFromToken();
-    this.historypurchaseService.getHistoryPurchaseById(userIdOnToken!).subscribe(response => {
+    /*this.historypurchaseService.getHistoryPurchaseById(userIdOnToken!).subscribe(response => {
       this.listPurchase = response;
       console.log(this.listPurchase);
-    });
+    });*/
     
   }
 

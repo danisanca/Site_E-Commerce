@@ -1,27 +1,69 @@
+.category-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card circular */
+.circle-card {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.circle-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Imagem dentro do círculo */
+.category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Botão que aparece sobre a imagem ao passar o mouse */
 .overlay-buttons {
-    display: none !important; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
 }
-.card-container:hover .overlay-buttons {
-    display: flex !important; 
-    opacity: 1 !important;
-    transition: opacity 0.3s ease !important;
+
+.circle-card:hover .overlay-buttons {
+  opacity: 1;
 }
-.card-container:hover img {
-    opacity: 0.6 !important; 
+
+/* Botão */
+.btn-Visualizar {
+  background-color: #ffffffcc;
+  border: none;
+  font-weight: 600;
+  color: #333;
+  border-radius: 25px;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease;
 }
-.card-container img {
-    transition: opacity 0.3s ease !important; 
+
+.btn-Visualizar:hover {
+  background-color: white;
 }
-.btn-Visualizar{
-    background-color: var(--primary-color) ;
-    color: var(--white-text-color) ;
-}
-.btn-Visualizar:hover{
-    background-color: var(--primary-color-300) ;
-    color: var(--primary-color) ;
-}
-.category-card{
-    background-color: var(--primary-color-300) ;
-    color: var(--primary-color) ;
-    opacity: 0.85;
+
+/* Nome da categoria */
+.category-name {
+  color: #333;
+  font-size: 1rem;
+  margin-top: 8px;
+  text-transform: capitalize;
 }

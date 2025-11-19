@@ -38,14 +38,14 @@
                 <h4 class="fw-bold mt-3">Detalhe da Compra</h4>
                 <div class="mt-3 d-flex flex-column justify-content-between">
                     <ul class="py-0 px-2 m-0">
-                        <li *ngFor="let item of cartList" class="text-decoration-none list-unstyled">
+                        <li *ngFor="let item of orderUser.orderDetailsDto" class="text-decoration-none list-unstyled">
                             <div class="d-flex w-100 justify-content-between align-content-center
                             mt-2">
                                 <div>
-                                    <p class="p-0 m-0">{{item.product.name}} </p>
-                                    <small class="ms-2"><b>Quantidade: </b>{{item.quantity}}</small>
+                                    <p class="p-0 m-0">{{item.productName}} </p>
+                                    <small class="ms-2"><b>Quantidade: </b>{{item.count}}</small>
                                 </div>
-                                <p class="m-0 p-0 align-content-center">{{(item.quantity*item.finalPrice)| currency:'BRL'}}</p>
+                                <p class="m-0 p-0 align-content-center">{{((item.price-(item.price*(item.discount/100)))*item.count)| currency:'BRL'}}</p>
                                 
                             </div>
                             <div class="section-divider-item"></div>

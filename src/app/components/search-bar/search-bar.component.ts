@@ -15,7 +15,7 @@ import { Router, RouterLink } from '@angular/router';
 export class SearchBarComponent  {
 
   searchTerm: string = '';
-  @Input() AllProducts: Product[] = [];
+  AllProducts: Product[] = [];
   filteredProducts: Product[] = [] as Product[];
   showDropdown:Boolean = false;
 
@@ -27,9 +27,12 @@ export class SearchBarComponent  {
       this.showDropdown = false;
       return;
     }
-    this.filteredProducts = this.AllProducts.filter(product =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+
+    this.productService.getAllLikeName(this.searchTerm).subscribe(result =>{
+      
+      this.filteredProducts = result.products;
+    });
+    
     this.showDropdown = this.filteredProducts.length > 0;
   }
 
@@ -48,7 +51,8 @@ export class SearchBarComponent  {
 
     if (matchingProduct) {
       this.router.navigate(['/products', matchingProduct.id]);
-    } else {
+    } 
+    else {
       this.router.navigate(['/products'], { state: { categorySelected: this.searchTerm } });
       this.searchTerm = "";
     }

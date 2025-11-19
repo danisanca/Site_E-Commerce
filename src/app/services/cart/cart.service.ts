@@ -1,75 +1,102 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from '../../interfaces/cartItem';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject ,catchError,map,Observable, of, tap} from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Cart, CartCreate, CartDetail, CartUpdate } from '../../interfaces/cartItem';
+import { getUserIdFromToken } from '../../helpers/functionsHelpers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-  private cartItems: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>(this.getCartFromStorage());
 
+export class CartService {
+  private baseApiUrl = environment.cartApiUrl;
+  private apiUrl = `${this.baseApiUrl}/Cart`;
+
+  private cartSubject = new BehaviorSubject<CartDetail[]>([]);
   cart$ = this.cartSubject.asObservable();
-  constructor() {  this.clearCartOnInit();} 
-  private getCartFromStorage(): CartItem[] {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+
+  constructor(private http: HttpClient) {
+    this.loadInitialCart();
+  }
+
+  create(cartModel:CartCreate): Observable<any>{
+    const url = `${this.apiUrl}/Create`;
+    return this.http.post(url, cartModel).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+  update(cartModel:CartUpdate): Observable<any>{
+    const url = `${this.apiUrl}/Update`;
+    return this.http.put(url, cartModel).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+  getByUserId(userId: string): Observable<Cart> {
+      const url = `${this.apiUrl}/GetById/${userId}`;
+      return this.http.get<Cart>(url).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+
+  deleteItemById(cartDetailId: string): Observable<any> {
+      const url = `${this.apiUrl}/DeleteItemById/${cartDetailId}`;
+      return this.http.delete(url).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+  clearCart(cartHeaderId: string): Observable<any> {
+      const url = `${this.apiUrl}/ClearCart/${cartHeaderId}`;
+      return this.http.delete(url).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+  checkOut(): Observable<any> {
+      const url = `${this.apiUrl}/CheckOut`;
+      return this.http.post(url,null).pipe(
+      tap(() => this.refreshCart())
+      );
+  }
+
+getCartFromApi(): Observable<CartDetail[]> {
+    let userId = getUserIdFromToken()!;
+
+    if (userId === "" || userId ===null) {
+      
+      return of([]);
+    }
+    const url = `${this.apiUrl}/GetById/${userId}`;
+
+
+    return this.http.get<Cart>(url).pipe(
+      map((response: Cart) => {
+        if (response && response.cartDetail && response.cartDetail.length > 0) {
+          return response.cartDetail;
+        } else {
+          return []; 
+        }
+      }),
+      catchError(error => {
+        console.error('Erro ao buscar carrinho na API:', error);
+        return of([]); 
+      })
+    );
+  }
+  refreshCart(): void {
+  this.getCartFromApi().subscribe(cartDetails => {
+    this.cartSubject.next(cartDetails);
+  });
+}
+  private loadInitialCart(): void {
+  this.getCartFromApi().subscribe(
+    (cartDetails: CartDetail[]) => {
+      this.cartSubject.next(cartDetails);
+    },
+    error => {
+      console.error('Falha ao carregar o carrinho inicial:', error);
+      this.cartSubject.next([]);
+    }
+  );
   }
   
-  private clearCartOnInit() {
-    localStorage.removeItem('cart');
-    this.cartItems = [];
-    this.cartSubject.next(this.cartItems);
-  }
-
-  private updateCartStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
-  }
-
-  addToCart(item: CartItem) {
-    const existingItem = this.cartItems.find(i => i.idProduct === item.idProduct);
-    if (existingItem) {
-      let amount = existingItem.quantity += item.quantity;
-      existingItem.quantity = amount;
-    } else {
-      let newItem = item;
-      if (item.product.discount != undefined) {
-        newItem.product.price = parseFloat((item.product.price - (item.product.discount.value * item.product.price) / 100).toFixed(2));
-        
-      } else {
-        newItem.product.price = parseFloat(newItem.product.price.toFixed(2));
-      }
-      this.cartItems.push(item);
-    }
-    this.updateCartStorage();
-    this.cartSubject.next(this.cartItems);
-  }
-  removeFromCart(itemId: number) {
-    const existingItem = this.cartItems.find(i => i.idProduct === itemId);
-    if (existingItem) {
-      let amount = existingItem.quantity -= 1;
-      if(amount === 0) {
-        this.cartItems = this.cartItems.filter(i => i.idProduct !== itemId);
-        this.updateCartStorage();
-        this.cartSubject.next(this.cartItems);
-
-      }else{
-        existingItem.quantity = amount;
-        this.updateCartStorage();
-        this.cartSubject.next(this.cartItems);
-      }
-    } 
-  }
-
-  removeAllFromCart(itemId: number) {
-    this.cartItems = this.cartItems.filter(i => i.idProduct !== itemId);
-    this.updateCartStorage();
-    this.cartSubject.next(this.cartItems);
-  }
-
-  clearCart() {
-    localStorage.removeItem('cart');
-    this.cartItems = [];
-    this.cartSubject.next(this.cartItems);
-  }
 }

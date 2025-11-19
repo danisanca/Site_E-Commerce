@@ -34,7 +34,7 @@ export class FinishPaymentComponent implements OnInit {
 
       this.historypurchaseService.updateHistoryPurchase(this.paymentResponse.external_reference,this.paymentResponse.status).subscribe();
 
-      this.cartService.clearCart();
+      //this.cartService.clearCart();
     });
   }
 }

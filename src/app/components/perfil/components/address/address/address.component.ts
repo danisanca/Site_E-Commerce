@@ -32,7 +32,6 @@ constructor(private userService:UserService,private toastr: ToastrService) { }
   }
 
   updateUser() {
-    console.log('Dados atualizados:', this.user.address);
     this.userService.updateUserAddress(this.user.address).subscribe({
       next: () => this.toastr.success('Endereço atualizado com sucesso!'),
       error: () => this.toastr.error('Erro ao atualizar o endereço.')

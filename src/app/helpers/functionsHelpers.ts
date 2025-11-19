@@ -2,11 +2,13 @@ import { AuthResponse } from "../interfaces/AuthResponse";
 import * as jwt_decode from "jwt-decode";
 import { User } from "../interfaces/user";
 import { JwtPayload } from "../interfaces/JwtPayload";
+import { jwtDecode } from "jwt-decode";
+import { HttpHeaders } from "@angular/common/http";
 
 export function createEmptyUser(): User {
     return {
       id: 0,
-      name: '',
+      nomeCompleto: '',
       email: '',
       status: '',
       typeAccount: '',
@@ -23,22 +25,24 @@ export function createEmptyUser(): User {
       }
     };
 }
-export function getUserIdFromToken(): number | null {
-    const storedUser = localStorage.getItem('user');
-    if (!storedUser) return null;
+
+
+export function getUserIdFromToken(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
   
     try {
-      const parsedUser: AuthResponse = JSON.parse(storedUser);
-      const token = parsedUser.acessToken.replace('Bearer ', '');
-      const decoded = jwt_decode.jwtDecode<JwtPayload>(token);
+      const decoded = jwtDecode<JwtPayload>(token);
+      const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
   
-      return decoded["nameid"]; 
+      return userId.toString(); 
       
     } catch (error) {
       console.error('Erro ao decodificar o token:', error);
       return null;
     }
   }
+
   export function validateCpfCnpj(document: string): 'CPF' | 'CNPJ' | 'INVALID' {
     const cleaned = document.replace(/\D/g, '');
   

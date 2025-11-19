@@ -30,6 +30,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'infoUser', pathMatch: 'full' }
     ] 
   },
-  { path: 'payment', component: PaymentComponent,canActivate: [AuthGuard] },
+  { path: 'payment/:id', component: PaymentComponent,canActivate: [AuthGuard] },
   { path: 'finishPayment', component: FinishPaymentComponent,canActivate: [AuthGuard] }
 ];

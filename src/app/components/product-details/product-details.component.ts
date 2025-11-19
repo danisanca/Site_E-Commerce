@@ -1,6 +1,5 @@
 import { Component, OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../interfaces/product';
 import { Image } from '../../interfaces/image';
 import { ProdutosService } from '../../services/produtos/produtos.service';
 import { EvidencesService } from '../../services/evidences/evidences.service';
@@ -11,9 +10,12 @@ import { StockService } from '../../services/stock/stock.service';
 import { Stock } from '../../interfaces/stock';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart/cart.service';
-import { CartItem } from '../../interfaces/cartItem';
 import { response } from 'express';
 import { firstValueFrom } from 'rxjs';
+import { Product } from '../../interfaces/product';
+import { getUserIdFromToken } from '../../helpers/functionsHelpers';
+import { Cart, CartCreate, CartDetail, CartUpdate } from '../../interfaces/cartItem';
+import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-product-details',
   imports: [RouterLink, CommonModule,FormsModule],
@@ -21,17 +23,16 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
+  userId:string = "";
+  productId:string = "";
   product: Product = {} as Product;
-  images:Image[] = [] as Image[];
+  images:string[] = [] as string[];
   stock:Stock = {} as Stock;
   evidences:Evidence[] = [] as Evidence[];
   //Controle de Imagens
   selectedImage!:string;
   //Avaliações
   numberAvaliations=0;
-  availableColors: string[] = ['#ff0000', '#00ff00', '#0000ff'];
-  //Seleção de Cor
-  selectedColor: string = this.availableColors[0];
   //Estoque
   quantity: number = 1; 
   maxQuantity:number=0;
@@ -46,71 +47,189 @@ export class ProductDetailsComponent implements OnInit {
     private stockService: StockService,
     private cartService:CartService,
     private route: ActivatedRoute,
-    private router: Router){}
-    
+    private router: Router,
+    private auth:AuthService){}
+   
     ngOnInit(): void {
-      const id = Number(this.route.snapshot.paramMap.get('id'));
-  
-      if(id === undefined || id <= 0){
-        this.router.navigate(['/'])
-        }
-  
-       this.productService.getProductsById(id).subscribe(response =>{
-        this.product = response;
-  
-        if(this.product !=null||this.product !=undefined){
-  
-          this.evidenceService.getEvidencesByProductId(this.product.id!).subscribe(response=>{
-            this.evidences = response;
-            this.numberAvaliations = this.evidences.length;
-          });
-          this.stockService.getStockByProductId(this.product.id!).subscribe(response =>{
-            this.stock = response;
-            this.validStock();
-          });
-  
-          this.imagesService.getImagesByProductId(this.product.id!).subscribe(response => {
-            this.images = response;
-            this.selectedImage = this.images[0].url;
-          });
-  
-          this.validOnCart();
-        }    
-       });
+      this.route.paramMap.subscribe(async params => {
+          const idProduct = params.get('id')?.toString();
+          if (idProduct === undefined || idProduct === "") {
+            this.router.navigate(['/'])
+          }
+          
+          else{
+            this.productId = idProduct;
+            this.userId = getUserIdFromToken()!;
+            
+            this.productService.getById(idProduct).subscribe(response =>{
+                this.product = response;
+                this.images = this.product.urlImages!;
+                  this.stock = {
+                    id: this.product.stock?.id,
+                    productId: this.product.stock?.productId as number,
+                    amount: this.product.stock?.amount as number,
+                    status: this.product.stock?.status as string
+                  }
+                  this.validStock();
+                  this.selectedImage = this.images[0];
+            });
+            
+            var isLoged = this.auth.isAuthenticated();
+            if(isLoged == true){
+            let cartUser: Cart = {} as Cart;
+            cartUser = await this.getCart();//TODO
+            if(cartUser.cartHeader != null){
+              cartUser.cartDetail.forEach(item => {
+              if(item.productId == idProduct){
+                this.onCart = true;
+                this.quantity = item.count;
+              }
+            });
+            }
+           
+            this.validOnCart();
+            }
+            
+          }
+      });
+      
     }
     
+
+    
     increaseQuantity() {
-      if(this.quantity < this.maxQuantity){
-        this.quantity++;
+      if(this.onCart == false){
+        if(this.quantity < this.maxQuantity){
+          this.quantity++;
+        }
+      }
+      else{
+        if(this.quantity < this.maxQuantity){
+          this.quantity++;
+           this.updateCart(this.product);
+        }
       }
     }
   
     decreaseQuantity() {
-      if (this.quantity > 1) {
+      if(this.onCart == false){
+        if (this.quantity > 1) {
+          this.quantity--;
+        }
+      }
+      else{
+        if (this.quantity > 1) {
         this.quantity--;
+        this.updateCart(this.product);
+        }
+        
       }
     }
-    addToCart(product: Product) {
-        let finalPrice:number = 0;
-        if (product.discount != undefined) {
-          finalPrice = parseFloat((product.price - (product.discount.value * product.price) / 100).toFixed(2));
-          
-        } else {
-          finalPrice = parseFloat(product.price.toFixed(2));
-        }
-        const cartItem: CartItem = { idProduct:product.id, product, quantity: this.quantity, finalPrice };
-        this.cartService.addToCart(cartItem);
-        this.validOnCart();
+    async updateCart(product: Product) {
+      var isLoged = this.auth.isAuthenticated();
+      if(isLoged == false){
+        this.router.navigate(['/login']);
       }
-      removeItem(idProduct:number):void{
-        this.cartService.removeAllFromCart(idProduct);
+      else{
+      let cartUser: Cart = await this.getCart();
+
+      let productOnCart:CartDetail = await this.getProductOnCart();
+        if(Object.keys(productOnCart).length === 0){
+          //Sem Carrinho
+          if(cartUser.cartHeader == null){
+            let cartModel:CartCreate = {
+                    userId: this.userId,
+                    item:
+                      {
+                        count:this.quantity,
+                        productId:product.id!,
+                        price:product.price,
+                        discount:product.discount?.percentDiscount == null ? 0 : product.discount?.percentDiscount,
+                        productName:product.name,
+                        description: product.description,
+                      },
+                    
+                  };
+            this.cartService.create(cartModel).subscribe({
+            next: (res) => {
+              this.validOnCart();
+            },
+            error: (err) => {
+              console.error('Erro no login:', err);
+            },
+        });
+          }
+          //com carrinho mais produto fora dele
+          else{
+            
+            let cartModel:CartUpdate = {
+                cartHeaderId:cartUser.cartHeader.id,
+                userId: this.userId,
+                item:
+                  {
+                    count:this.quantity,
+                    productId:product.id!,
+                    price:product.price,
+                    discount:product.discount?.percentDiscount == null ? 0 : product.discount?.percentDiscount,
+                    productName:product.name,
+                    description:product.description
+                  },
+                
+              };
+              this.cartService.update(cartModel).subscribe({
+          next: (res) => {
+            this.validOnCart();
+          },
+          error: (err) => {
+            console.error('Erro no login:', err);
+          },
+        });
+          }
+      
+        }
+        else{
+          let cartModel:CartUpdate = {
+                cartHeaderId:cartUser.cartHeader.id,
+                userId: this.userId,
+                item:
+                  {
+                    count:this.quantity,
+                    productId:product.id!,
+                    price:product.price,
+                    discount:product.discount?.percentDiscount == null ? 0 : product.discount?.percentDiscount,
+                    productName:product.name,
+                    description:product.description
+                  },
+                
+              };
+              this.cartService.update(cartModel).subscribe({
+                next: (res) => {
+                  this.validOnCart();
+                },
+                error: (err) => {
+                  console.error('Erro no login:', err);
+                },
+              });
+        }
+      }
+      }
+
+      async removeItem(){
+        let productOnCart:CartDetail = await this.getProductOnCart();
+        this.cartService.deleteItemById(productOnCart.id).subscribe({
+              next:  (res) => {
+                this.validOnCart();
+              },
+              error: (err) => {
+                console.error('Erro no login:', err);
+              },
+            });
+        
       }
       changeImage(image: string) {
         this.selectedImage = image;
       }
-      selectColor(color: string) {
-        this.selectedColor = color;
-      }
+      
       getStarType(star: number): string {
         if (this.product?.rating >= star) {
           return 'full'; 
@@ -122,16 +241,16 @@ export class ProductDetailsComponent implements OnInit {
       }
   
 
-  validOnCart(){
-    this.cartService.cart$.subscribe(items => {
-      if(items.find(i => i.idProduct === this.product.id)){
-        this.onCart = true;
-      }
-      else{
-        this.onCart = false;
-      }
-    });
+  async validOnCart(){
+    let productOnCart:CartDetail = await this.getProductOnCart();
+
+    if(Object.keys(productOnCart).length === 0){
+      this.onCart = false;
+    }else{
+      this.onCart = true;
+    }
   }
+
   validStock(){
     if(this.stock.amount > 0 && this.stock.status === "Ativo"){
       this.canBuy = true;
@@ -141,5 +260,26 @@ export class ProductDetailsComponent implements OnInit {
       this.maxQuantity = 0;
     }
   }
+  async getCart(): Promise<Cart>{
+    
+    const response = await firstValueFrom(this.cartService.getByUserId(this.userId));
+    
+    return response;
+    
+    
+  }
 
+  async getProductOnCart():Promise<CartDetail>{
+    let cartUser: Cart = await this.getCart();
+    let productOnCart:CartDetail ={} as CartDetail
+    if(cartUser.cartHeader != null){
+      cartUser.cartDetail.forEach(item => {
+              if(item.productId == this.productId ){
+                  productOnCart = item;
+              }
+              
+            });
+    }
+      return productOnCart;
+    }
 }

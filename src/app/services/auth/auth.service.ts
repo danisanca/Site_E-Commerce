@@ -4,22 +4,23 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoginResponse } from '../../interfaces/login';
+import { JwtPayload, LoginResponse } from '../../interfaces/login';
 import { tap } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
+import { CartService } from '../cart/cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseApiUrl = environment.apiUrl;
-  private apiUrl = `${this.baseApiUrl}/Login`;
-
+  private baseApiUrl = environment.mainApiUrl;
+  private apiUrl = `${this.baseApiUrl}/Auth/Login`;
   private isLoggedInSubject: BehaviorSubject<boolean>;
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private cartService:CartService) {
     //-
-    this.isLoggedInSubject = new BehaviorSubject<boolean>(false); // inicializa antes
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false); 
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
     
     const isLogged = this.isAuthenticated();
@@ -30,11 +31,12 @@ export class AuthService {
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}`, { email, password }).pipe(
       tap((response) => {
-        if (response.authenticated) {
-          localStorage.setItem('token', response.acessToken);
-          localStorage.setItem('user', JSON.stringify(response));
+        if (response.isLogedIn) {
+          localStorage.setItem('token', response.jwtToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
 
           this.isLoggedInSubject.next(true);
+          this.cartService.refreshCart();
         }
       })
     );
@@ -42,9 +44,10 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('refreshToken');
 
-    this.isLoggedInSubject.next(false); // agora com certeza já está instanciado
+    this.isLoggedInSubject.next(false); 
+    this.cartService.refreshCart();
   }
 
   getToken(): string | null {
@@ -52,23 +55,19 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const userData = localStorage.getItem('user');
-
-    if (!userData) return false;
+    const token = localStorage.getItem('token');
+    if (!token) return false;
 
     try {
-      const user = JSON.parse(userData);
-      const created = new Date(user.created);
-      const expiration = new Date(user.expiration);
-      const now = new Date();
-
-      if (now >= created && now < expiration) {
+      const decoded = jwtDecode<JwtPayload>(token);
+      const now = Date.now() / 1000; // em segundos
+      if (decoded.exp && decoded.exp > now) {
         return true;
       } else {
         this.logout();
         return false;
       }
-    } catch (e) {
+    } catch {
       this.logout();
       return false;
     }

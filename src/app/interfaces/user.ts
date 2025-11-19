@@ -2,7 +2,7 @@ import { Address } from "./Address";
 
 export interface User{
     id?:number;
-    name:string;
+    nomeCompleto:string;
     email:string;
     status:string;
     typeAccount:string;
@@ -10,12 +10,12 @@ export interface User{
 }
 export interface UserUpdate{
     id?:number;
-    name:string;
+    nomeCompleto:string;
     email:string;
 }
 export interface ChangePassword{
-    idUser:number;
-    CurrentPassword:string;
-    NewPassword:string;
+    userId:number;
+    currentPassword:string;
+    newPassword:string;
     ConfirmNewPassword:string;
 }

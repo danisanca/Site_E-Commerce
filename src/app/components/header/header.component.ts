@@ -1,12 +1,14 @@
 import { Component,AfterViewInit, Input, OnInit, HostListener, ElementRef, ViewChild  } from '@angular/core';
 import {  RouterLink,RouterModule  } from '@angular/router';
 import Collapse from 'bootstrap/js/dist/collapse';
-import { CartItem } from '../../interfaces/cartItem';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart/cart.service';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { Cart, CartDetail } from '../../interfaces/cartItem';
+import { getUserIdFromToken } from '../../helpers/functionsHelpers';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -18,10 +20,10 @@ import { FormsModule } from '@angular/forms';
 
 export class HeaderComponent implements OnInit,AfterViewInit {
   sizeCart!:number;
-  cartList!:CartItem[];
-  @Input() AllProducts!: any[];
+  cartList!:CartDetail[];
   isLoggedIn: boolean = false;
   showDropdown: boolean = false;
+  userId:string = "";
 
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
 
@@ -30,17 +32,23 @@ export class HeaderComponent implements OnInit,AfterViewInit {
     private authService: AuthService
   ){}
   ngOnInit(): void {
+    this.userId = getUserIdFromToken()!;
+
     this.cartService.cart$.subscribe(items => {
       this.cartList = items;
-      this.sizeCart = this.cartList.length;
-      
+      this.sizeCart = items.length;
     });
-
+   
     this.authService.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
     });
     
   }
+   async getCart(): Promise<Cart>{
+      const response = await firstValueFrom(this.cartService.getByUserId(this.userId));
+      return response;
+     
+    }
   logout() {
     this.authService.logout();
     this.showDropdown = false;

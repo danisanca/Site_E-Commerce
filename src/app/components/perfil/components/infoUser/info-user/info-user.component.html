@@ -7,7 +7,7 @@
         <div class="col-12 col-lg-7 d-flex justify-content-center">
             <form class="p-0 w-75 w-lg-50">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="inputName" aria-describedby="inputName" [(ngModel)]="user.name" name="Name">
+                  <input type="text" class="form-control" id="inputName" aria-describedby="inputName" [(ngModel)]="user.nomeCompleto" name="Name">
                   <label for="inputName">Nome</label>
                 </div>
                 <div class="form-floating mb-3">
@@ -29,11 +29,11 @@
         <div class="col-12 col-lg-7 d-flex justify-content-center">
             <form class="p-0 w-75 w-lg-50">
                 <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="inputCurrentPassword" aria-describedby="inputCurrentPassword" [(ngModel)]="passwordForm.CurrentPassword" name="CurrentPassword">
+                  <input type="password" class="form-control" id="inputCurrentPassword" aria-describedby="inputCurrentPassword" [(ngModel)]="passwordForm.currentPassword" name="CurrentPassword">
                   <label for="inputCurrentPassword">Senha Atual</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input  type="password" class="form-control" id="inputNewPassword" aria-describedby="inputNewPassword" [(ngModel)]="passwordForm.NewPassword" name="NewPassword">
+                    <input  type="password" class="form-control" id="inputNewPassword" aria-describedby="inputNewPassword" [(ngModel)]="passwordForm.newPassword" name="NewPassword">
                     <label for="inputNewPassword" class="form-label">Nova Senha</label>
                 </div>
                 <div class="form-floating mb-3">

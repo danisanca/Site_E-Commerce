@@ -1,9 +1,10 @@
 export interface LoginResponse {
-    authenticated: boolean;
-    created: string;
-    expiration: string;
-    acessToken: string;
-    userName: string;
-    shopId: number;
-    message: string;
+    isLogedIn: boolean;
+    jwtToken:string
+    refreshToken:string
   }
+export interface JwtPayload{
+  exp: number;
+  sub: string;
+  [key: string]: any;
+}

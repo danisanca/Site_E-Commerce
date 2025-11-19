@@ -18,10 +18,10 @@
               <div class="col-md-2 d-flex flex-row align-items-center
               col-12 flex-md-column justify-content-center my-2 my-md-0">
                 <img *ngFor="let img of images"
-                     [src]="img.url"
+                     [src]="img"
                      class="img-select rounded mb-2 ms-2"
-                     [class.selected]="img.url === selectedImage"
-                     (click)="changeImage(img.url)"
+                     [class.selected]="img === selectedImage"
+                     (click)="changeImage(img)"
                      alt="Miniatura do Produto">
               </div>
           
@@ -51,23 +51,7 @@
                 </div>
                
                 <p >{{product.description }}</p>
-                <!-- Opção de Cores
-                
-                <div class="col-12 d-flex  m-0 p-0 ">
-                  <div class="color-picker">
-                    <p class="text-start">Cores:</p>
-                    <div class="color-options">
-                      <button 
-                        *ngFor="let color of availableColors"
-                        [style.background]="color"
-                        [class.selected]="color === selectedColor"
-                        (click)="selectColor(color)">
-                      </button>
-                    </div>
-                   
-                  </div>
-                </div>
-                -->
+               
                 
                 <div class="row d-flex w-100 flex-column py-3 justify-content-center align-content-start ms-2">
                   <div *ngIf="!canBuy" class="col-12 d-flex flex-column">
@@ -85,10 +69,10 @@
                     <p class="p-0 my-0 ms-2 me-0 align-content-center">{{stock.amount}} Disponivel</p>
                   </div>
 
-                  <button *ngIf="onCart == false" (click)="addToCart(product)" class="btn btn-add-cart w-75 my-2 mx-auto px-1"  >
+                  <button *ngIf="onCart == false" (click)="updateCart(product)" class="btn btn-add-cart w-75 my-2 mx-auto px-1"  >
                     {{ canBuy ? 'Adicionar ao Carrinho' : 'Indisponível' }}
                   </button>
-                  <button *ngIf="onCart == true" (click)="removeItem(product.id!)" class="btn btn-remove-cart w-75 my-2 mx-auto px-1">
+                  <button *ngIf="onCart == true" (click)="removeItem()" class="btn btn-remove-cart w-75 my-2 mx-auto px-1">
                    Remover do Carrinho
                   </button>
                   <button *ngIf="canBuy" class="btn btn-go-cart w-75 my-2 mx-auto px-1" routerLink="/cart">
