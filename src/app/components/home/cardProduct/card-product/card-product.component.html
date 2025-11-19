@@ -1,18 +1,14 @@
 <div class="bg-body-tertiary text-start position-relative card-container">
-  <img
-    class="rounded w-100 img-fluid"
-    [src]="product.imageUrl[0]"
-    alt="Quarto"
-    />
+  <img class="rounded w-100 img-fluid" [src]="product.urlImages?.[0]" alt="Quarto">
     <div class="card-soldOut rounded d-flex position-absolute top-0 start-0 
-     px-2 py-1 align-items-center justify-content-between w-100" style="height: 32px;">
+    px-2 py-1 align-items-center justify-content-between w-100" style="height: 32px;">
       <p class="text-white fw-bold m-0 position-absolute top-0 start-0 bg-danger mt-1 ms-1 p-1 rounded" *ngIf="showSoldOut"
       style="width: auto;">
         Esgotado
       </p>
       <p class="rounded-circle text-discount d-flex justify-content-center align-items-center mt-1 me-1
         position-absolute top-0 end-0"
-         style="width: 48px; height: 48px;"
+        style="width: 48px; height: 48px;"
          *ngIf="showDiscount">
         -{{percent}}%
       </p>
@@ -34,7 +30,7 @@
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 
       d-flex justify-content-center align-items-center overlay-buttons">
     <div class="text-center w-75">
-      <a  routerLink="/products/{{ product.id }}" class="btn btn-Buy my-2 w-100">{{ showSoldOut ? 'Ver' : 'Comprar' }}</a>
+      <a  (click)="goToDetails(product)"  class="btn btn-Buy my-2 w-100">{{ showSoldOut ? 'Ver' : 'Comprar' }}</a>
       <button *ngIf="!showSoldOut" class="btn btn-add-cart my-2 w-100" (click)="addToCart(product)">Adicionar ao Carrinho</button>
     </div>
   </div>

@@ -23,15 +23,20 @@ export class HomeComponent implements OnInit {
   products!: Product[] ;
   stocks!:Stock[];
   productList!:any[];
+  //Paginação
+  currentPage: number = 1;  // Página atual
+  itemsPerPage: number = 4; // Número de produtos por página
+  sizeList: number = 0;
   constructor(private productService:ProdutosService,
     private categoriesService:CategoriesService,){}
   
   ngOnInit(): void {
 
 
-    this.productService.getAllProducts().subscribe(response => {
-      this.products = response;
-      this.updateListProducts(response);
+    this.productService.getAll(this.currentPage,this.itemsPerPage,"").subscribe(response => {
+      this.products = response.products;
+      this.sizeList = response.sizeList;
+      this.updateListProducts(response.products);
     });
 
     this.categoriesService.getAllCategories().subscribe(response => {
@@ -43,14 +48,21 @@ export class HomeComponent implements OnInit {
   }
   
   updateListProducts(products:Product[]){
-      let filterProducts = products.map(product => ({
+    if(products !=null){
+       let filterProducts = products.map(product => ({
         ...product,
         showSoldOut: product.stock == null ? true : false
       })
     
-  );
+      );
     this.productList = filterProducts.sort(() => Math.random() - 0.5) 
     .slice(0, 4);
+
+    }
+    else{
+      this.productList = []
+    }
+     
   }
   
 }

@@ -8,12 +8,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class StockService {
-  private baseApiUrl = environment.apiUrl;
-  private apiUrl = `${this.baseApiUrl}/Stock/GetStockByProductId`;
+  private baseApiUrl = environment.mainApiUrl;
+  private apiUrl = `${this.baseApiUrl}/Stock/GetByProductId`;
   
   constructor(private http: HttpClient) { }
   
-  getStockByProductId(idproductId: number): Observable<Stock> {
+  getStockByProductId(idproductId: string): Observable<Stock> {
       const url = `${this.apiUrl}/${idproductId}`;
       return this.http.get<Stock>(url).pipe(
         catchError(error => {

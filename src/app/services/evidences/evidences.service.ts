@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class EvidencesService {
-  private baseApiUrl = environment.apiUrl;
+  private baseApiUrl = environment.mainApiUrl;
     private apiUrl = `${this.baseApiUrl}/Evidence`;
     
     constructor(private http: HttpClient) { }

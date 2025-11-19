@@ -14,7 +14,7 @@
       <li *ngFor="let product of filteredProducts" class="dropdown-item" (mousedown)="selectProduct(product)">
         <div>
           <h5>{{ product.name }}</h5>
-          <h6>{{ (product.discount?.value ? (product.price - (product.price * product.discount!.value / 100)) : product.price) | currency:'BRL' }}</h6>
+          <h6>{{ (product.discount?.percentDiscount ? (product.price - (product.price * product.discount!.percentDiscount / 100)) : product.price) | currency:'BRL' }}</h6>
         </div>
       </li>
     </ul>

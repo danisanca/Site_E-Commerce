@@ -9,16 +9,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CategoriesService {
 
-  private baseApiUrl = environment.apiUrl;
+  private baseApiUrl = environment.mainApiUrl;
   private apiUrl = `${this.baseApiUrl}/Categories`;
   
   constructor(private http: HttpClient) { }
 
   getAllCategories(): Observable<Category[]>  {
-    return this.http.get<Category[]>(`${this.apiUrl}/GetAllActiveCategories`).pipe(
+    return this.http.get<Category[]>(`${this.apiUrl}/GetAll`).pipe(
             catchError(error => {
-              console.error('Erro ao buscar imagens:', error);
-              return throwError(() => new Error('Erro ao buscar imagens'));
+              console.error('Erro ao buscar as categorias:', error);
+              return throwError(() => new Error('Erro ao buscar as categorias'));
             })
           );
     }

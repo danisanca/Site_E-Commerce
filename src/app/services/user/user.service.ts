@@ -10,14 +10,14 @@ import { Address } from '../../interfaces/Address';
 })
 export class UserService {
 
-  private baseApiUrl = environment.apiUrl;
+  private baseApiUrl = environment.mainApiUrl;
   private apiUrlUser = `${this.baseApiUrl}/User`;
   private apiUrlAddress = `${this.baseApiUrl}/Address`;
   
   constructor(private http: HttpClient) { }
   //User Routes
-  getUserById(id: number): Observable<User> {
-    const url = `${this.apiUrlUser}/GetUserFullByIdUser/${id}`;
+  getUserById(id: string): Observable<User> {
+    const url = `${this.apiUrlUser}/GetById/${id}`;
     return this.http.get<User>(url);
   }
   updateUser(user: UserUpdate): Observable<any> {
@@ -26,12 +26,12 @@ export class UserService {
   }
   ChangePassword(modelChangePassword: ChangePassword): Observable<any> {
     const url = `${this.apiUrlUser}/ChangePassword`;
-    return this.http.put(url, modelChangePassword);
+    return this.http.post(url, modelChangePassword);
   }
 
   //Adress Routes
   updateUserAddress(address: Address): Observable<any> {
-    const url = `${this.apiUrlAddress}/UpdateAddress`;
+    const url = `${this.apiUrlAddress}/Update`;
     return this.http.put(url, address);
   }
 }

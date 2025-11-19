@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ImagesService {
 
-  private baseApiUrl = environment.apiUrl;
+  private baseApiUrl = environment.mainApiUrl;
   private apiUrl = `${this.baseApiUrl}/Payment`;
   
   constructor(private http: HttpClient) { }
