@@ -9,7 +9,7 @@ Este projeto é um site de e-commerce desenvolvido utilizando Angular, Bootstrap
 - **Lista de indicação de Produtos**: Lista de produtos que podem ser definidos de forma aleatória ou especifica.
 - **Carinho de Compras**: Opção de adicionar os produtos no carrinho e visao geral de todos os produtos adicionados.
 - **Pagamento do Produto**: Depois de selecionar os produtos é possivel seguir para a forma de pagamento para aquele carrinhos.
-- **Rota de Pagamento por Authenticação**: Só é possivel avançar para a pagina de pagamento após fazer login (User:Admin - Senha:1234).
+- **Rota de Pagamento por Authenticação**: Só é possivel avançar para a pagina de pagamento após fazer login.
 - **Layout Responsivo**: Layout foi desenvolvido tanto para desktop quanto para mobile.
 - **Integração com Gateway de Pagamento**: Integração com mercado pago para pagamento.
 
